@@ -1,0 +1,26 @@
+완료했습니다.
+
+산출물:
+- E:\ax\PRJs\gpt56-scaling\runs\test3b\terra_max\index.html
+- E:\ax\PRJs\gpt56-scaling\runs\test3b\terra_max\SOURCES.md
+- E:\ax\PRJs\gpt56-scaling\runs\test3b\terra_max\VERIFICATION.md
+
+구현 내용:
+- 1080×1920 세로 고정 Canvas 모션그래픽
+- 1974 → 2026, 정확히 15.0초에 완결 후 최종 화면 유지
+- `requestAnimationFrame` 기반
+- 1~9호선 및 주요 광역/도시철도 포함 21개 성장 이벤트
+- 시작부터 전체망 가이드 표시, 연도순 채움
+- 환승 마커·주요 역 라벨·노선별 색상 적용
+- 외부 리소스 요청 없이 완전 단일 HTML로 동작
+- 매 렌더 프레임 `window.__mg = { t, year, lines_shown }` 갱신
+
+검증 완료:
+- 헤드리스 Playwright로 최종 프레임 렌더링 확인
+- 콘솔 오류 0건
+- 런타임 외부 요청 0건
+- 15,000ms: `{t:15000, year:2026, lines_shown:21}`
+- 16,000ms에도 동일 값 유지 확인
+- 상세 시퀀스·출처·가공 방법은 각각 VERIFICATION.md, SOURCES.md에 기록했습니다.
+  [tool] ( ͡° ͜ʖ ͡°) analyzing...
+{"profile": "terra_max", "seconds": 393.5, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:36:10"}

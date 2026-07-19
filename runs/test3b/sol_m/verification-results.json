@@ -1,0 +1,151 @@
+{
+  "url": "file:///E:/ax/PRJs/gpt56-scaling/runs/test3b/sol_m/index.html",
+  "viewport": {
+    "width": 1080,
+    "height": 1920
+  },
+  "samples": [
+    {
+      "t": 0,
+      "year": 1974,
+      "lines_shown": 0
+    },
+    {
+      "t": 1,
+      "year": 1977,
+      "lines_shown": 1
+    },
+    {
+      "t": 3,
+      "year": 1985,
+      "lines_shown": 2
+    },
+    {
+      "t": 5.033,
+      "year": 1992,
+      "lines_shown": 4
+    },
+    {
+      "t": 7,
+      "year": 1999,
+      "lines_shown": 8
+    },
+    {
+      "t": 9,
+      "year": 2007,
+      "lines_shown": 11
+    },
+    {
+      "t": 11.033,
+      "year": 2014,
+      "lines_shown": 17
+    },
+    {
+      "t": 13.016,
+      "year": 2022,
+      "lines_shown": 22
+    },
+    {
+      "t": 14.016,
+      "year": 2026,
+      "lines_shown": 24
+    },
+    {
+      "t": 15,
+      "year": 2026,
+      "lines_shown": 24
+    }
+  ],
+  "at15": {
+    "mg": {
+      "t": 15,
+      "year": 2026,
+      "lines_shown": 24
+    },
+    "offsets": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "yearText": "2026",
+    "countText": "24 / 24 LINES"
+  },
+  "afterHold": {
+    "t": 15,
+    "year": 2026,
+    "lines_shown": 24
+  },
+  "consoleErrors": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "failedRequests": []
+}

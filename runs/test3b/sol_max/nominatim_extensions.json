@@ -1,0 +1,409 @@
+{
+  "청산역 연천": [
+    {
+      "place_id": 222031726,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 5253627661,
+      "lat": "37.9951537",
+      "lon": "127.0743434",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.43502000867299523,
+      "addresstype": "railway",
+      "name": "청산",
+      "display_name": "청산, 학담로, 초성리, 청산면, 연천군, 경기도, 11023, 대한민국",
+      "boundingbox": [
+        "37.9901537",
+        "38.0001537",
+        "127.0693434",
+        "127.0793434"
+      ]
+    },
+    {
+      "place_id": 222319103,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12173734522,
+      "lat": "37.9951465",
+      "lon": "127.0741456",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 4.0000762951049326e-05,
+      "addresstype": "highway",
+      "name": "청산역",
+      "display_name": "청산역, 학담로, 초성리, 청산면, 연천군, 경기도, 11023, 대한민국",
+      "boundingbox": [
+        "37.9950965",
+        "37.9951965",
+        "127.0740956",
+        "127.0741956"
+      ]
+    }
+  ],
+  "전곡역": [
+    {
+      "place_id": 222024093,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 368637544,
+      "lat": "38.0245987",
+      "lon": "127.0718642",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.4353606624145101,
+      "addresstype": "railway",
+      "name": "전곡",
+      "display_name": "전곡, 전곡역로93번길, 전곡리, 전곡읍, 연천군, 경기도, 11031, 대한민국",
+      "boundingbox": [
+        "38.0195987",
+        "38.0295987",
+        "127.0668642",
+        "127.0768642"
+      ]
+    },
+    {
+      "place_id": 222033893,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12173734514,
+      "lat": "38.0240479",
+      "lon": "127.0712875",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 4.0000762951049326e-05,
+      "addresstype": "highway",
+      "name": "전곡역",
+      "display_name": "전곡역, 전곡역로, 전곡리, 전곡읍, 연천군, 경기도, 11031, 대한민국",
+      "boundingbox": [
+        "38.0239979",
+        "38.0240979",
+        "127.0712375",
+        "127.0713375"
+      ]
+    }
+  ],
+  "연천역": [
+    {
+      "place_id": 222013330,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 368636150,
+      "lat": "38.1007279",
+      "lon": "127.0737179",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.4529144226503214,
+      "addresstype": "railway",
+      "name": "연천",
+      "display_name": "연천, 275, 연천로, 차탄리, 연천읍, 연천군, 경기도, 11015, 대한민국",
+      "boundingbox": [
+        "38.0957279",
+        "38.1057279",
+        "127.0687179",
+        "127.0787179"
+      ]
+    },
+    {
+      "place_id": 222116344,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 7152872726,
+      "lat": "38.1017095",
+      "lon": "127.0750527",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 4.5001144426596745e-05,
+      "addresstype": "highway",
+      "name": "연천역",
+      "display_name": "연천역, 연천로, 현가리, 연천읍, 연천군, 경기도, 11013, 대한민국",
+      "boundingbox": [
+        "38.1016595",
+        "38.1017595",
+        "127.0750027",
+        "127.0751027"
+      ]
+    }
+  ],
+  "별내별가람역": [
+    {
+      "place_id": 220545107,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 13154013969,
+      "lat": "37.6681497",
+      "lon": "127.1171750",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 5.9190508888334745e-05,
+      "addresstype": "highway",
+      "name": "별내별가람역.남양주보훈요양원",
+      "display_name": "별내별가람역.남양주보훈요양원, 덕송2로, 별내동, 남양주시, 경기도, 12097, 대한민국",
+      "boundingbox": [
+        "37.6680997",
+        "37.6681997",
+        "127.1171250",
+        "127.1172250"
+      ]
+    }
+  ],
+  "오남역": [
+    {
+      "place_id": 223025444,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 9331602049,
+      "lat": "37.7052107",
+      "lon": "127.1916101",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 5.9190508888334745e-05,
+      "addresstype": "highway",
+      "name": "오남역",
+      "display_name": "오남역, 양지로, 오남읍, 남양주시, 경기도, 12036, 대한민국",
+      "boundingbox": [
+        "37.7051607",
+        "37.7052607",
+        "127.1915601",
+        "127.1916601"
+      ]
+    }
+  ],
+  "진접역": [
+    {
+      "place_id": 221963539,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1289010784,
+      "lat": "37.7222635",
+      "lon": "127.2144578",
+      "category": "highway",
+      "type": "path",
+      "place_rank": 27,
+      "importance": 0.04005919050888837,
+      "addresstype": "road",
+      "name": "철마산 등산로 진접역 출발",
+      "display_name": "철마산 등산로 진접역 출발, 진접읍, 남양주시, 경기도, 12052, 대한민국",
+      "boundingbox": [
+        "37.7213421",
+        "37.7227392",
+        "127.2107899",
+        "127.2184123"
+      ]
+    },
+    {
+      "place_id": 221962059,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1289022214,
+      "lat": "37.7199929",
+      "lon": "127.2336929",
+      "category": "highway",
+      "type": "path",
+      "place_rank": 27,
+      "importance": 0.04005919050888837,
+      "addresstype": "road",
+      "name": "철마산 등산로(진접역 출발)",
+      "display_name": "철마산 등산로(진접역 출발), 진접읍, 남양주시, 경기도, 12051, 대한민국",
+      "boundingbox": [
+        "37.7197606",
+        "37.7201508",
+        "127.2332733",
+        "127.2341251"
+      ]
+    }
+  ],
+  "암사역사공원역": [
+    {
+      "place_id": 419008453,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 13890054401,
+      "lat": "37.5574460",
+      "lon": "127.1381680",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "암사역사공원역 3번출구",
+      "display_name": "암사역사공원역 3번출구, 380-25, 아리수로, 암사동, 암사3동, 강동구, 서울특별시, 05237, 대한민국",
+      "boundingbox": [
+        "37.5573960",
+        "37.5574960",
+        "127.1381180",
+        "127.1382180"
+      ]
+    },
+    {
+      "place_id": 419008456,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 13890054404,
+      "lat": "37.5575680",
+      "lon": "127.1401600",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "암사역사공원역 1번출구",
+      "display_name": "암사역사공원역 1번출구, 36, 고덕로27길, 암사동, 암사3동, 강동구, 서울특별시, 05236, 대한민국",
+      "boundingbox": [
+        "37.5575180",
+        "37.5576180",
+        "127.1401100",
+        "127.1402100"
+      ]
+    }
+  ],
+  "장자호수공원역": [
+    {
+      "place_id": 222930084,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12716928156,
+      "lat": "37.5873131",
+      "lon": "127.1377918",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 5.772716868844156e-05,
+      "addresstype": "highway",
+      "name": "장자호수공원역",
+      "display_name": "장자호수공원역, 체육관로, 수택동, 구리시, 경기도, 11948, 대한민국",
+      "boundingbox": [
+        "37.5872631",
+        "37.5873631",
+        "127.1377418",
+        "127.1378418"
+      ]
+    }
+  ],
+  "구리역": [
+    {
+      "place_id": 222465256,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 471319268,
+      "lat": "37.6032591",
+      "lon": "127.1433609",
+      "category": "building",
+      "type": "train_station",
+      "place_rank": 30,
+      "importance": 5.772716868844156e-05,
+      "addresstype": "building",
+      "name": "구리역",
+      "display_name": "구리역, 32-29, 건원대로34번길, 수택동, 구리시, 경기도, 11922, 대한민국",
+      "boundingbox": [
+        "37.6028577",
+        "37.6036605",
+        "127.1421532",
+        "127.1445685"
+      ]
+    },
+    {
+      "place_id": 222215118,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1230602043,
+      "lat": "37.6015770",
+      "lon": "127.1372504",
+      "category": "landuse",
+      "type": "construction",
+      "place_rank": 24,
+      "importance": 0.08005772716868846,
+      "addresstype": "construction",
+      "name": "구리역 롯데캐슬시그니처",
+      "display_name": "구리역 롯데캐슬시그니처, 수택동, 구리시, 경기도, 대한민국",
+      "boundingbox": [
+        "37.6006255",
+        "37.6025496",
+        "127.1354081",
+        "127.1395761"
+      ]
+    }
+  ],
+  "동구릉역": [],
+  "다산역": [
+    {
+      "place_id": 222771627,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1469067924,
+      "lat": "36.0504171",
+      "lon": "126.9485553",
+      "category": "building",
+      "type": "yes",
+      "place_rank": 30,
+      "importance": 5.622873273818597e-05,
+      "addresstype": "building",
+      "name": "다산역",
+      "display_name": "다산역, 용지길, 방교, 함열읍, 익산시, 전북특별자치도, 54511, 대한민국",
+      "boundingbox": [
+        "36.0503393",
+        "36.0504925",
+        "126.9484755",
+        "126.9486342"
+      ]
+    }
+  ],
+  "별내역": [],
+  "아라역 인천": [
+    {
+      "place_id": 417805462,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 13823492113,
+      "lat": "37.5926124",
+      "lon": "126.7127172",
+      "category": "amenity",
+      "type": "doctors",
+      "place_rank": 30,
+      "importance": 7.128480964365632e-05,
+      "addresstype": "amenity",
+      "name": "검단 아라역 산부인과 의원",
+      "display_name": "검단 아라역 산부인과 의원, 발산로, 원당동, 아라동, 검단구, 인천광역시, 22865, 대한민국",
+      "boundingbox": [
+        "37.5925624",
+        "37.5926624",
+        "126.7126672",
+        "126.7127672"
+      ]
+    }
+  ],
+  "신검단중앙역": [],
+  "검단호수공원역": [],
+  "원종역": [],
+  "부천종합운동장역": [
+    {
+      "place_id": 226070205,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1060935999,
+      "lat": "37.5050233",
+      "lon": "126.7966077",
+      "category": "office",
+      "type": "company",
+      "place_rank": 30,
+      "importance": 6.08064393071949e-05,
+      "addresstype": "office",
+      "name": "부천종합운동장역 인천교통공사 별관",
+      "display_name": "부천종합운동장역 인천교통공사 별관, 길주로, 춘의동, 원미구, 부천시, 경기도, 14560, 대한민국",
+      "boundingbox": [
+        "37.5049341",
+        "37.5051075",
+        "126.7963193",
+        "126.7968898"
+      ]
+    }
+  ]
+}

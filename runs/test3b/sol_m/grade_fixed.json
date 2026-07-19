@@ -1,0 +1,65 @@
+﻿{
+  "test": "test3b",
+  "run_dir": "runs\\test3b\\sol_m",
+  "gates": {
+    "G1_render": true,
+    "console_errors": [],
+    "runtime_ext_requests": [],
+    "G2_timeline": {
+      "t_complete": 15,
+      "target": 15.0,
+      "ok": true,
+      "hold_since": 15
+    },
+    "G3_year": {
+      "min": 1974,
+      "max": 2026,
+      "monotone": true,
+      "ok": true
+    },
+    "G4_growth": {
+      "coverage_series": [
+        0.0403,
+        0.06,
+        0.1046,
+        0.1276,
+        0.1507
+      ],
+      "final_hues": 24,
+      "monotone": true,
+      "color_div>=8": true,
+      "ok": true
+    },
+    "lines_shown_max": 24,
+    "sample_count": 86
+  },
+  "coverage": {
+    "2.0": {
+      "lit_ratio": 0.0403,
+      "hues": 16
+    },
+    "5.0": {
+      "lit_ratio": 0.06,
+      "hues": 18
+    },
+    "8.0": {
+      "lit_ratio": 0.1046,
+      "hues": 24
+    },
+    "11.0": {
+      "lit_ratio": 0.1276,
+      "hues": 24
+    },
+    "14.0": {
+      "lit_ratio": 0.1507,
+      "hues": 24
+    },
+    "final": {
+      "lit_ratio": 0.1508,
+      "hues": 24
+    }
+  },
+  "score_auto": 100,
+  "evaluator_pass": true,
+  "note": "데이터가 조합마다 다르므로 좌표·역명 정확도(노선 수·색상·개통연도)와 정성(다크모드 미감·연출)은 SOURCES.md·최종 프레임 수동 대조로 확정. window.__mg 미구현 시 계측 불가 → 수동 실행 필요."
+}

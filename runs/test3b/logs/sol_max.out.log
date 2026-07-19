@@ -1,0 +1,37 @@
+완료했습니다. 모든 산출물은 현재 작업 폴더에 있습니다.
+
+주요 파일:
+- `E:\ax\PRJs\gpt56-scaling\runs\test3b\sol_max\index.html`
+  - 브라우저에서 직접 실행
+  - 1080×1920 고정 세로 스테이지
+  - 데이터와 Noto Sans KR 폰트까지 완전 내장
+  - 외부 서버·네트워크 요청 없이 작동
+- `E:\ax\PRJs\gpt56-scaling\runs\test3b\sol_max\SOURCES.md`
+  - 개통 연도·노선색·역 좌표·연결 구조 출처
+  - 데이터 가공 기준과 24개 노선 목록
+  - OSM, Wikipedia, 오픈소스 노선 데이터의 사용 방법 및 라이선스
+- `E:\ax\PRJs\gpt56-scaling\runs\test3b\sol_max\VERIFICATION.md`
+  - 달성 기준별 PASS 결과
+  - 실제 rAF `window.__mg` 계측 시퀀스
+  - 외부 요청·콘솔 오류·정지 화면 검증 기록
+- `E:\ax\PRJs\gpt56-scaling\runs\test3b\sol_max\final.png`
+  - 최종 프레임 시각 점검용 캡처
+
+검증 결과:
+- 콘솔 오류: 0건
+- 페이지 오류: 0건
+- 실패 요청: 0건
+- HTTP/HTTPS 런타임 요청: 0건
+- 15.000초 계측값:
+  - `t: 15`
+  - `year: 2026`
+  - `lines_shown: 24`
+- 15초 이후 0.7초 대기 후에도 동일 계측값 유지
+- 최종 두 프레임: 바이트 단위 동일
+- 마지막 약 1초: 24/24 전체 노선망 유지
+- 스크롤 및 오디오: 없음
+- 최종 시각 QA: 텍스트 잘림 없음, 주요 역 라벨 중첩 완화, 환승역·일반역 범례 정상
+
+`index.html`을 더블클릭해 바로 재생할 수 있습니다.
+  [tool] ( •_•)>⌐■-■ analyzing...
+{"profile": "sol_max", "seconds": 1002.0, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:46:18"}

@@ -1,0 +1,6 @@
+{"profile": "luna_max", "seconds": 370.2, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:35:46"}
+{"profile": "terra_max", "seconds": 393.5, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:36:10"}
+{"profile": "sol_max", "seconds": 1002.0, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:46:18"}
+{"profile": "sol_h", "seconds": 1432.6, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:53:29"}
+{"profile": "sol_m", "seconds": 1494.8, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:54:31"}
+{"profile": "sol_u", "seconds": 1683.8, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:57:40"}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>서울 수도권 지하철 성장 1974–2026</title>
+<style>
+*{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07101e;font-family:Arial,'Malgun Gothic',sans-serif}body{display:grid;place-items:center}#stage{width:1080px;height:1920px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#18365d 0,#0c1b31 39%,#06101c 100%);transform-origin:center center}canvas{position:absolute;inset:0;width:1080px;height:1920px}.grain{position:absolute;inset:0;opacity:.1;background-image:radial-gradient(#b9e7ff 0.7px,transparent .8px);background-size:9px 9px;mix-blend-mode:screen}.title{position:absolute;top:114px;left:82px;z-index:2;color:#f7fbff}.kicker{font-size:23px;letter-spacing:6px;font-weight:700;color:#89afd3}.title h1{font-size:57px;letter-spacing:-3px;margin:18px 0 0;line-height:1.1}.sub{font-size:20px;color:#a5c0d9;margin-top:16px;letter-spacing:1px}.year{position:absolute;z-index:3;left:82px;bottom:125px;color:#fff;font-size:188px;letter-spacing:-12px;font-weight:800;line-height:.8;text-shadow:0 4px 20px #0008}.year small{display:block;font-size:23px;letter-spacing:4px;color:#8fb5d8;margin:25px 0 0 12px}.progress{position:absolute;bottom:83px;left:84px;width:912px;height:4px;background:#ffffff20}.progress i{display:block;height:100%;background:#e9f7ff;box-shadow:0 0 16px #b6e4ff;width:0}.legend{position:absolute;right:76px;top:120px;z-index:3;text-align:right;color:#dceeff;font-size:16px;line-height:1.7;letter-spacing:.5px}.legend b{color:white}.caption{position:absolute;left:84px;bottom:286px;max-width:650px;color:#d5e8f7;font-size:27px;font-weight:700;line-height:1.4;opacity:0;transition:opacity .18s}.note{position:absolute;right:78px;bottom:150px;color:#87a8c4;font-size:14px;letter-spacing:1.4px;text-align:right;line-height:1.6}.fade{opacity:.45}@media(max-aspect-ratio:9/16){#stage{transform:scale(calc(100vw / 1080))}}@media(min-aspect-ratio:9/16){#stage{transform:scale(calc(100vh / 1920))}}
+</style></head><body><main id="stage" aria-label="1974년부터 2026년까지 서울 수도권 지하철 노선망 성장 모션그래픽"><canvas id="c" width="1080" height="1920"></canvas><div class="grain"></div><header class="title"><div class="kicker">SEOUL METROPOLITAN SUBWAY</div><h1>도시가 이어진 시간</h1><div class="sub">1974 — 2026 · 주요 도시철도·광역전철 개통 연도순</div></header><div class="legend"><b>개통된 노선</b> / 전체 가이드<br><span id="count">0</span> ROUTES REVEALED</div><div class="caption" id="caption"></div><div class="year" id="year">1974<small>NETWORK GROWTH</small></div><div class="progress"><i id="bar"></i></div><div class="note">15 SEC / 1080 × 1920<br>SCHEMATIC · NOT TO SCALE</div></main>
+<script>
+'use strict';
+/* Curated, embedded schematic data. Coordinates are a hand-drawn topology for legibility,
+   anchored to real stations; it is intentionally not a geographic map. `opened` is each service's
+   first revenue-opening year (not every extension year). */
+const L=[
+['1호선',1974,'#0052A4',[[170,970],[270,900],[380,840],[500,805],[610,770],[720,700],[835,610]],['인천','신도림','서울역','시청','청량리','회기','의정부']],
+['2호선',1980,'#00A84D',[[245,1070],[270,910],[390,815],[555,790],[690,840],[760,970],[720,1110],[560,1170],[390,1145],[245,1070]],['신도림','홍대입구','시청','을지로3가','왕십리','잠실','강남','사당','신림']],
+['3호선',1985,'#EF7C1C',[[185,640],[315,700],[420,770],[530,880],[635,1035],[745,1160],[860,1275]],['대화','연신내','종로3가','고속터미널','양재','수서','오금']],
+['4호선',1985,'#00A5DE',[[265,1320],[375,1180],[465,1030],[530,880],[620,740],[710,590],[790,455]],['안산','사당','서울역','동대문역사문화공원','미아','창동','진접']],
+['경의·중앙선',2009,'#77C4A3',[[120,735],[260,765],[390,805],[500,805],[620,820],[755,875],[915,920]],['문산','디지털미디어시티','홍대입구','서울역','왕십리','청량리','용문']],
+['5호선',1995,'#996CAC',[[135,1025],[300,1000],[430,970],[530,955],[650,990],[775,1025],[925,1000]],['방화','여의도','광화문','왕십리','천호','강동','하남검단산']],
+['6호선',2000,'#CD7C2E',[[250,660],[310,750],[370,860],[400,990],[475,1110],[600,1190],[720,1210]],['응암','연신내','합정','이태원','삼각지','공덕','봉화산']],
+['7호선',1996,'#747F00',[[165,1150],[290,1100],[410,1040],[550,950],[700,855],[830,780],[930,710]],['석남','온수','고속터미널','건대입구','노원','도봉산','장암']],
+['8호선',1996,'#E6186C',[[580,1150],[640,1085],[700,1025],[750,955],[800,895]],['암사역사공원','잠실','가락시장','복정','모란']],
+['수인·분당선',1994,'#F5C500',[[690,1450],[705,1320],[710,1190],[700,1030],[650,900],[590,780]],['인천','원인재','수원','선릉','왕십리','청량리']],
+['인천 1호선',1999,'#6F9FCB',[[105,1290],[180,1225],[250,1165],[320,1110]],['계양','부평','부평시장','인천터미널']],
+['공항철도',2007,'#0090D4',[[85,530],[190,590],[320,690],[460,805],[560,880]],['인천공항2터미널','검암','디지털미디어시티','서울역','홍대입구']],
+['9호선',2009,'#B59600',[[150,1080],[300,1060],[455,1045],[600,1045],[740,1065],[900,1110]],['개화','김포공항','여의도','고속터미널','종합운동장','중앙보훈병원']],
+['경춘선',2010,'#178C72',[[590,780],[680,680],[775,590],[900,500]],['청량리','상봉','평내호평','춘천']],
+['신분당선',2011,'#D4003B',[[560,1170],[610,1105],[650,1030],[690,955],[735,875],[780,800]],['신사','강남','양재','판교','정자','광교']],
+['인천 2호선',2016,'#F06A00',[[105,1140],[175,1080],[245,1020],[315,965]],['검단오류','검암','가정','주안']],
+['우이신설선',2017,'#B0CE18',[[495,700],[525,650],[560,600],[610,555]],['신설동','보문','성신여대입구','북한산우이']],
+['서해선',2018,'#8FC31F',[[95,1210],[175,1150],[255,1080],[335,1015]],['원시','시흥시청','초지','소사']],
+['김포골드라인',2019,'#A17F00',[[120,980],[170,950],[225,925],[270,910]],['양촌','구래','운양','김포공항']],
+['수인·분당선 통합',2020,'#F5C500',[[430,1450],[535,1390],[635,1320],[705,1250]],['인천','오이도','수원','청량리']],
+['GTX-A',2024,'#9B3D88',[[470,1460],[565,1280],[645,1090],[740,880],[865,650]],['동탄','성남','수서','서울역','운정중앙']]
+].map((d,i)=>({name:d[0],opened:d[1],color:d[2],pts:d[3],labels:d[4],id:i}));
+const c=document.getElementById('c'),x=c.getContext('2d'),yearEl=document.getElementById('year'),bar=document.getElementById('bar'),count=document.getElementById('count'),cap=document.getElementById('caption');
+const start=1974,end=2026,duration=15000;
+function mix(a,b,p){return a+(b-a)*p}function pointOn(p,t){let n=p.length-1,u=t*n,i=Math.min(n-1,Math.floor(u)),f=u-i;return [mix(p[i][0],p[i+1][0],f),mix(p[i][1],p[i+1][1],f)]}
+function path(pts,cut=1){x.beginPath();let max=Math.max(0,Math.min(1,cut))*(pts.length-1);pts.forEach((p,i)=>{if(i>Math.ceil(max))return;let q=p;if(i===Math.ceil(max)&&i>0){let prev=pts[i-1],f=max-(i-1);q=[mix(prev[0],p[0],f),mix(prev[1],p[1],f)]}i?x.lineTo(...q):x.moveTo(...q)});x.stroke()}
+function node(p,r,color,transfer){x.beginPath();x.arc(p[0],p[1],r,0,Math.PI*2);x.fillStyle=transfer?'#f5fbff':color;x.fill();x.lineWidth=transfer?5:3;x.strokeStyle=transfer?'#0d2945':'#dff4ff';x.stroke()}
+function stationLabel(p,text,color){x.save();x.font='700 15px Arial, Malgun Gothic, sans-serif';x.textBaseline='middle';let w=x.measureText(text).width+20, px=p[0]+13,py=p[1]-26;x.fillStyle='#07101ed9';x.strokeStyle=color;x.lineWidth=1.5;x.beginPath();x.roundRect(px,py,w,27,13);x.fill();x.stroke();x.fillStyle='#f5fbff';x.fillText(text,px+10,py+14);x.restore()}
+function draw(t){x.clearRect(0,0,1080,1920);x.save();x.translate(0,10); // guide
+for(const l of L){x.strokeStyle='#b8d7ed24';x.lineWidth=10;x.lineCap='round';x.lineJoin='round';path(l.pts)}
+const yr=Math.min(end,Math.floor(start+(end-start)*Math.min(1,t/duration)));let shown=0;for(const l of L){let local=(t-((l.opened-start)/(2024-start))*13000)/850; if(local<=0)continue;shown++; x.strokeStyle=l.color;x.shadowColor=l.color;x.shadowBlur=13;x.lineWidth=12;x.lineCap='round';x.lineJoin='round';path(l.pts,Math.min(1,local));x.shadowBlur=0;if(local>=1){for(let i=0;i<l.pts.length;i++){let p=l.pts[i],transfer=L.some(o=>o!==l&&o.opened<=l.opened&&o.pts.some(q=>Math.hypot(q[0]-p[0],q[1]-p[1])<35));node(p,transfer?11:6,l.color,transfer)}if(l.id<15)stationLabel(l.pts[0],l.labels[0],l.color)} else {node(pointOn(l.pts,Math.min(1,local)),9,l.color,false)} }
+x.restore();yearEl.firstChild.nodeValue=String(yr);bar.style.width=(Math.min(1,t/duration)*100)+'%';count.textContent=shown;let recent=L.filter(l=>l.opened===yr);if(recent.length&&t<14000){cap.textContent=yr+' · '+recent.map(l=>l.name).join(' / ')+' 개통';cap.style.opacity=1}else cap.style.opacity=0;window.__mg={t:Math.min(t,duration),year:yr,lines_shown:shown};}
+let base=null,done=false;function frame(now){if(base===null)base=now;let t=Math.min(duration,now-base);draw(t);if(t<duration)requestAnimationFrame(frame);else {done=true;draw(duration)}}window.__mgStep=(ms)=>draw(Math.max(0,Math.min(duration,ms)));if(!new URLSearchParams(location.search).has('manual'))requestAnimationFrame(frame);
+</script></body></html>

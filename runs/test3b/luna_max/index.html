@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, height=1920, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Seoul Metro · 1974—2026</title>
+<style>
+  :root{color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}body{display:grid;place-items:center;font-family:Arial,"Noto Sans KR",sans-serif}main{width:1080px;height:1920px;position:relative;overflow:hidden;background:#07111d}canvas{display:block;width:1080px;height:1920px}#sr{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<main aria-label="서울 수도권 지하철 개통 연도별 성장 모션그래픽">
+<canvas id="stage" width="1080" height="1920"></canvas>
+<div id="sr">1974년 1호선부터 2026년까지 서울 수도권 전철망이 개통 순서대로 확장되는 15초 모션그래픽입니다. 최종 노선: 26개.</div>
+</main>
+<script>
+'use strict';
+const W=1080,H=1920, canvas=document.getElementById('stage'), ctx=canvas.getContext('2d');
+const C={bg:'#07111d',grid:'#16283a',text:'#edf6ff',muted:'#7992a7',panel:'#0b1a2a',white:'#f5fbff'};
+// Schematic, not to geographic scale. Coordinates preserve principal interchange structure.
+const lines=[
+ {id:'1',name:'1호선',year:1974,color:'#0052a4',pts:[[90,1120],[210,1090],[350,1050],[500,1015],[650,930],[790,810],[940,700]],labels:[[90,1120,'인천'],[500,1015,'서울역'],[790,810,'청량리']]},
+ {id:'2',name:'2호선',year:1980,color:'#00a84f',pts:[[235,730],[330,650],[465,610],[610,640],[760,720],[825,850],[785,1000],[665,1080],[510,1100],[360,1025],[275,900],[235,730]],labels:[[235,730,'시청'],[825,850,'강남'],[665,1080,'잠실']]},
+ {id:'3',name:'3호선',year:1985,color:'#ef7c1c',pts:[[410,520],[450,650],[485,805],[510,1015],[560,1150],[650,1290],[760,1400]]},
+ {id:'4',name:'4호선',year:1985,color:'#00a5de',pts:[[220,420],[320,520],[360,700],[350,880],[390,1020],[510,1100],[620,1190],[700,1330],[760,1500]]},
+ {id:'5',name:'5호선',year:1995,color:'#996cac',pts:[[150,850],[280,820],[430,835],[590,860],[760,850],[900,900],[950,1030],[930,1170],[870,1300],[820,1450]]},
+ {id:'B',name:'분당선',year:1994,color:'#f5a200',pts:[[510,1190],[590,1160],[665,1080],[760,1120],[825,1210],[850,1350],[900,1480],[970,1580]],labels:[[510,1190,'선릉'],[825,1210,'수원']]},
+ {id:'7',name:'7호선',year:1996,color:'#747f00',pts:[[110,610],[225,690],[350,790],[500,900],[665,1000],[790,1080],[905,1160]]},
+ {id:'8',name:'8호선',year:1996,color:'#e6186c',pts:[[410,1260],[520,1190],[665,1080],[785,1000],[900,950]]},
+ {id:'6',name:'6호선',year:2000,color:'#cd7c2f',pts:[[170,1120],[260,1030],[350,900],[430,835],[510,820],[650,830],[780,900],[860,1010],[820,1140],[700,1240]]},
+ {id:'IC1',name:'인천 1호선',year:1999,color:'#7ca8d5',pts:[[70,900],[170,850],[275,900],[350,1025],[430,1110],[560,1150]]},
+ {id:'J',name:'중앙선',year:2005,color:'#77c4a3',pts:[[650,420],[650,580],[665,720],[665,900],[650,1080],[700,1240],[810,1400],[930,1510]],labels:[[650,420,'용산'],[810,1400,'양평']]},
+ {id:'AREX',name:'공항철도',year:2007,color:'#3681b7',pts:[[70,1360],[190,1280],[320,1190],[500,1015],[650,930],[790,810],[900,680]],labels:[[70,1360,'인천공항'],[500,1015,'서울역']]},
+ {id:'9',name:'9호선',year:2009,color:'#bdb092',pts:[[250,1370],[370,1270],[510,1190],[665,1080],[790,1000],[900,970],[1010,990]]},
+ {id:'GJ',name:'경의선',year:2009,color:'#77c4a3',pts:[[80,520],[210,600],[350,700],[500,820],[650,930],[790,1060],[930,1210]]},
+ {id:'GC',name:'경춘선',year:2010,color:'#178c72',pts:[[650,420],[760,380],[860,430],[950,520],[1000,650]]},
+ {id:'SB',name:'신분당선',year:2011,color:'#d31145',pts:[[590,640],[665,760],[760,900],[825,1050],[850,1210],[900,1380]]},
+ {id:'UIJ',name:'의정부경전철',year:2012,color:'#f7b32b',pts:[[390,300],[470,380],[500,520],[510,650],[550,760]]},
+ {id:'SUIN',name:'수인선',year:2012,color:'#f5a200',pts:[[70,1360],[190,1280],[320,1190],[500,1190],[650,1290],[760,1370],[900,1480]]},
+ {id:'EV',name:'용인경전철',year:2013,color:'#56a6d9',pts:[[720,1170],[790,1260],[820,1390],[850,1530],[960,1600]]},
+ {id:'G',name:'경강선',year:2016,color:'#0054a6',pts:[[650,1290],[760,1370],[850,1470],[950,1560],[1010,1640]]},
+ {id:'IC2',name:'인천 2호선',year:2016,color:'#f5a200',pts:[[70,900],[170,850],[275,900],[350,1025],[420,1110]]},
+ {id:'UIS',name:'우이신설선',year:2017,color:'#b7c5d0',pts:[[300,250],[380,330],[410,520],[430,650],[500,760]]},
+ {id:'SEOHAE',name:'서해선',year:2018,color:'#8fc31f',pts:[[180,1510],[280,1430],[390,1320],[510,1190],[620,1190],[760,1250]]},
+ {id:'GIMPO',name:'김포골드라인',year:2019,color:'#ad8605',pts:[[180,420],[260,500],[320,620],[350,700]]},
+ {id:'SILLIM',name:'신림선',year:2022,color:'#6789ca',pts:[[470,1390],[510,1280],[560,1150],[610,1080],[665,1000]]},
+ {id:'GTXA',name:'GTX-A',year:2024,color:'#3d7fc1',pts:[[160,740],[300,700],[450,720],[590,760],[760,850],[900,1040]]}
+];
+const transferNames=new Set(['서울역','시청','강남','잠실','청량리','용산','홍대입구','종로3가','고속터미널','김포공항','인천공항']);
+const nodes=[
+ [500,1015,'서울역'],[235,730,'시청'],[825,850,'강남'],[665,1080,'잠실'],[790,810,'청량리'],[650,930,'용산'],[430,835,'홍대입구'],[510,820,'종로3가'],[760,900,'고속터미널'],[350,700,'김포공항'],[70,1360,'인천공항'],[665,1000,'신도림'],[510,1190,'사당']
+];
+const sortedYears=[...new Set(lines.map(d=>d.year))].sort((a,b)=>a-b); const startYear=1974,endYear=2026,duration=15,holdStart=14;
+let t0=null,lastT=-1;
+function lerp(a,b,t){return a+(b-a)*t} function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+function yearAt(t){return Math.min(endYear,Math.round(startYear+(endYear-startYear)*Math.min(1,t/holdStart)))}
+function revealAt(d,t){const norm=(d.year-startYear)/(endYear-startYear); const target=norm*holdStart; return Math.max(0,Math.min(1,(t-target)/.72))}
+function pathPartial(pts,p){let lens=[],total=0;for(let i=1;i<pts.length;i++){let l=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);lens.push(l);total+=l}let want=total*Math.max(0,Math.min(1,p)),acc=0,out=[pts[0]];for(let i=1;i<pts.length;i++){let l=lens[i-1];if(acc+l<=want){out.push(pts[i]);acc+=l;continue}let q=(want-acc)/l;out.push([lerp(pts[i-1][0],pts[i][0],q),lerp(pts[i-1][1],pts[i][1],q)]);break}return out}
+function drawPolyline(pts,color,width,alpha){if(pts.length<2)return;ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke();ctx.restore()}
+function text(s,x,y,size,color,weight='400',align='left'){ctx.fillStyle=color;ctx.font=`${weight} ${size}px Arial,"Noto Sans KR",sans-serif`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(s,x,y)}
+function draw(t){
+ ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);
+ // subtle grid
+ ctx.strokeStyle=C.grid;ctx.lineWidth=1;ctx.globalAlpha=.38;for(let x=40;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,300);ctx.lineTo(x,H-90);ctx.stroke()}for(let y=360;y<H-90;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}ctx.globalAlpha=1;
+ text('SEOUL METROPOLITAN SUBWAY',72,92,25,'#7f9ab0','700'); text('도시가 선으로 자라는 시간',72,155,48,C.text,'700'); text('OPENING YEARS · 1974 — 2026',72,208,21,C.muted,'400');
+ const y=yearAt(t); text(String(y),W-72,128,92,C.white,'700','right'); text('YEAR',W-72,194,18,C.muted,'700','right');
+ // timeline
+ const tx=72,ty=285,tw=W-144;ctx.strokeStyle='#29435b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx+tw,ty);ctx.stroke();
+ for(const yy of [1974,1985,2000,2010,2020,2026]){let px=tx+tw*(yy-startYear)/(endYear-startYear);ctx.fillStyle=yy<=y?'#d8e8f5':'#29435b';ctx.beginPath();ctx.arc(px,ty,5,0,Math.PI*2);ctx.fill();text(String(yy),px,ty+28,16,yy<=y?C.text:C.muted,'700','center')}
+ // network area border
+ ctx.strokeStyle='#21394d';ctx.lineWidth=1;ctx.strokeRect(42,350,996,1290);text('SCHEMATIC NETWORK / NOT TO GEOGRAPHIC SCALE',72,1680,15,C.muted,'700');
+ // guide all routes first
+ for(const d of lines) drawPolyline(d.pts,'#8ba9bb',4,.13);
+ // active routes
+ const shown=[];for(const d of lines){let p=ease(revealAt(d,t));if(p>0){shown.push(d.id);drawPolyline(pathPartial(d.pts,p),d.color,10,.96);drawPolyline(pathPartial(d.pts,p),'#ffffff',2,.22)}}
+ // nodes / transfer markers
+ for(const n of nodes){let visible=lines.some(d=>d.pts.some(p=>Math.hypot(p[0]-n[0],p[1]-n[1])<2) && revealAt(d,t)>.98);if(!visible)continue;let transfer=transferNames.has(n[2]);ctx.save();ctx.fillStyle=C.bg;ctx.strokeStyle=transfer?'#ffffff':'#c8dbe8';ctx.lineWidth=transfer?4:2;ctx.beginPath();ctx.arc(n[0],n[1],transfer?12:7,0,Math.PI*2);ctx.fill();ctx.stroke();if(transfer){ctx.fillStyle='#ffffff';ctx.beginPath();ctx.arc(n[0],n[1],4,0,Math.PI*2);ctx.fill()}ctx.restore()}
+ // labels for selected major stations when their line is active
+ for(const d of lines){const p=revealAt(d,t);if(p<.98)continue;for(const l of (d.labels||[])){ctx.font='700 16px Arial,"Noto Sans KR",sans-serif';ctx.fillStyle='#9eb6c7';ctx.fillRect(l[0]+12,l[1]-18,ctx.measureText(l[2]).width+20,28);text(l[2],l[0]+20,l[1]-4,16,C.bg,'700')}}
+ // legend + status
+ const ly=1740; text('개통된 노선',72,ly,18,C.muted,'700'); text(String(shown.length).padStart(2,'0')+' / '+String(lines.length).padStart(2,'0'),72,ly+42,34,C.text,'700');text('routes shown',72,ly+70,14,C.muted,'400');
+ const active=lines.filter(d=>d.year<=y).sort((a,b)=>a.year-b.year); let lx=270, row=0;for(const d of active.slice(-10)){if(lx>930){lx=270;row++}ctx.fillStyle=d.color;ctx.fillRect(lx,ly-8+row*28,18,18);text(d.name,lx+28,ly+1+row*28,15,C.text,'700');lx+=115}
+ text('FULL NETWORK GUIDE',W-72,1820,16,C.muted,'700','right');text(t>=holdStart?'COMPLETE':'BUILDING',W-72,1855,22,t>=holdStart?'#9be7b1':'#f7c873','700','right');
+ window.__mg={t:Number(Math.min(duration,t).toFixed(3)),year:y,lines_shown:shown};
+}
+function frame(now){if(t0===null)t0=now;let t=Math.min(duration,(now-t0)/1000);if(t!==lastT){draw(t);lastT=t}if(t<duration)requestAnimationFrame(frame)}
+window.__mg={t:0,year:startYear,lines_shown:[]};requestAnimationFrame(frame);
+</script>
+</body></html>

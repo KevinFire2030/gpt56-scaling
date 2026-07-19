@@ -1,0 +1,80 @@
+[
+  {
+    "profile": "luna_max",
+    "combo": "Luna Max",
+    "pass": "?",
+    "score": 90,
+    "lines": null,
+    "year_range": "1974~2026",
+    "tokens": 843690,
+    "seconds": 370.2,
+    "cost_str": "$0.4548",
+    "cost": 0.4548228,
+    "api_calls": 25
+  },
+  {
+    "profile": "sol_h",
+    "combo": "Sol High",
+    "pass": "?",
+    "score": 100,
+    "lines": 19,
+    "year_range": "1974~2026",
+    "tokens": 6044028,
+    "seconds": 1432.6,
+    "cost_str": "$10.1461",
+    "cost": 10.146075,
+    "api_calls": 68
+  },
+  {
+    "profile": "sol_m",
+    "combo": "Sol Medium",
+    "pass": "?",
+    "score": 100,
+    "lines": 24,
+    "year_range": "1974~2026",
+    "tokens": 7163951,
+    "seconds": 1494.8,
+    "cost_str": "$12.3985",
+    "cost": 12.398519,
+    "api_calls": 75
+  },
+  {
+    "profile": "terra_max",
+    "combo": "Terra Max",
+    "pass": "?",
+    "score": 75,
+    "lines": 21,
+    "year_range": "1974~2026",
+    "tokens": 904088,
+    "seconds": 393.5,
+    "cost_str": "$1.1435",
+    "cost": 1.143515,
+    "api_calls": 27
+  },
+  {
+    "profile": "sol_max",
+    "combo": "Sol Max",
+    "pass": "?",
+    "score": 100,
+    "lines": 24,
+    "year_range": "1974~2026",
+    "tokens": 1970808,
+    "seconds": 1002.0,
+    "cost_str": "$5.3459",
+    "cost": 5.345855,
+    "api_calls": 35
+  },
+  {
+    "profile": "sol_u",
+    "combo": "Sol Ultra",
+    "pass": "?",
+    "score": 100,
+    "lines": 24,
+    "year_range": "1974~2026",
+    "tokens": 4731011,
+    "seconds": 1683.8,
+    "cost_str": "$8.9636",
+    "cost": 8.963613,
+    "api_calls": 58
+  }
+]

@@ -1,0 +1,38 @@
+﻿[
+    {
+        "Profile":  "luna_max",
+        "Id":  21792,
+        "Out":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\luna_max.out.log",
+        "Err":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\luna_max.err.log"
+    },
+    {
+        "Profile":  "sol_h",
+        "Id":  30024,
+        "Out":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_h.out.log",
+        "Err":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_h.err.log"
+    },
+    {
+        "Profile":  "sol_m",
+        "Id":  31376,
+        "Out":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_m.out.log",
+        "Err":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_m.err.log"
+    },
+    {
+        "Profile":  "terra_max",
+        "Id":  32364,
+        "Out":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\terra_max.out.log",
+        "Err":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\terra_max.err.log"
+    },
+    {
+        "Profile":  "sol_max",
+        "Id":  31928,
+        "Out":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_max.out.log",
+        "Err":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_max.err.log"
+    },
+    {
+        "Profile":  "sol_u",
+        "Id":  852,
+        "Out":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_u.out.log",
+        "Err":  "E:\\ax\\PRJs\\gpt56-scaling\\runs\\test3b\\logs\\sol_u.err.log"
+    }
+]

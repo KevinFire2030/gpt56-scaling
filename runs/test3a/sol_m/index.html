@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DANTE LABS — Gravity Jump Comparison</title>
+  <style>
+    :root {
+      --ink: #e9f5ff;
+      --muted: #89a0b6;
+      --cyan: #58e6ff;
+      --cyan2: #8ff4ff;
+      --amber: #ffc760;
+      --red: #ff5f68;
+      --panel: rgba(8, 18, 29, .78);
+      --line: rgba(124, 218, 255, .22);
+      --shadow: 0 18px 80px rgba(0, 0, 0, .42);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #02070c; color: var(--ink); }
+    body { font-family: Inter, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    button { font: inherit; }
+    canvas { display: block; }
+
+    #stage { position: fixed; inset: 0; z-index: 0; }
+    #stage::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(90deg, rgba(4,13,22,.10), transparent 45%, rgba(0,0,0,.25)),
+                  radial-gradient(circle at 50% 10%, transparent 20%, rgba(0,0,0,.25) 100%);
+    }
+
+    .noise { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: .13; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E"); }
+    .scanlines { position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: .15; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(123,215,255,.06) 3px 4px); }
+
+    header {
+      position: fixed; left: 0; right: 0; top: 0; z-index: 10; height: 78px;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 28px;
+      border-bottom: 1px solid var(--line); background: linear-gradient(180deg, rgba(2,8,13,.94), rgba(2,8,13,.46)); backdrop-filter: blur(12px);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: .24em; font-weight: 800; }
+    .brand-mark { width: 32px; aspect-ratio: 1; border: 1px solid var(--cyan); display: grid; place-items: center; transform: rotate(45deg); box-shadow: inset 0 0 16px rgba(88,230,255,.18), 0 0 18px rgba(88,230,255,.12); }
+    .brand-mark span { transform: rotate(-45deg); color: var(--cyan); font-size: 9px; }
+    .title { text-align: center; }
+    .title h1 { font-family: Arial, Helvetica, sans-serif; font-size: clamp(16px, 2vw, 24px); letter-spacing: .18em; margin: 0; font-weight: 700; }
+    .title p { margin: 5px 0 0; color: var(--muted); font-size: 9px; letter-spacing: .30em; }
+    .system { justify-self: end; display: flex; align-items: center; gap: 9px; color: #9eb2c5; font-size: 10px; letter-spacing: .16em; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #65ffae; box-shadow: 0 0 10px #65ffae; animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .38; } }
+
+    .divider { position: fixed; left: 50%; top: 78px; bottom: 118px; z-index: 6; width: 1px; background: linear-gradient(transparent, rgba(102,220,255,.6), transparent); box-shadow: 0 0 14px rgba(88,230,255,.25); pointer-events: none; }
+    .vs { position: fixed; z-index: 8; left: 50%; top: 48%; transform: translate(-50%,-50%); width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid rgba(109,225,255,.45); background: rgba(3,12,19,.84); color: var(--cyan2); font: 800 12px Arial; letter-spacing: .13em; clip-path: polygon(50% 0, 92% 25%, 92% 75%, 50% 100%, 8% 75%, 8% 25%); }
+
+    .world-label { position: fixed; top: 98px; z-index: 7; width: 50%; padding: 0 4.2vw; pointer-events: none; }
+    .world-label.earth { left: 0; }
+    .world-label.moon { right: 0; text-align: right; }
+    .planet-name { display: block; font-family: Arial, sans-serif; font-size: clamp(25px, 3.3vw, 50px); font-weight: 800; letter-spacing: .12em; line-height: .9; text-shadow: 0 8px 30px #000; }
+    .planet-index { color: var(--cyan); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; }
+    .moon .planet-index { color: var(--amber); }
+
+    .gravity-tag { display: inline-flex; gap: 10px; align-items: baseline; margin-top: 12px; padding: 8px 11px; background: rgba(2,9,15,.56); border-left: 2px solid var(--cyan); color: var(--muted); font-size: 9px; letter-spacing: .13em; }
+    .moon .gravity-tag { border-left: 0; border-right: 2px solid var(--amber); }
+    .gravity-tag strong { font-size: 15px; color: var(--ink); letter-spacing: .02em; }
+
+    .gauge { position: fixed; z-index: 7; top: 210px; bottom: 158px; width: 35px; display: flex; flex-direction: column; justify-content: space-between; color: rgba(196,229,246,.54); font-size: 8px; pointer-events: none; }
+    .gauge.left { left: 22px; }
+    .gauge.right { right: 22px; align-items: flex-end; }
+    .tick { width: 18px; border-top: 1px solid rgba(166,223,248,.30); position: relative; }
+    .right .tick { text-align: right; }
+    .tick span { position: absolute; top: -6px; left: 23px; }
+    .right .tick span { left: auto; right: 23px; }
+
+    .telemetry { position: fixed; left: 0; right: 0; bottom: 0; min-height: 118px; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; border-top: 1px solid var(--line); background: rgba(2,8,13,.89); backdrop-filter: blur(15px); box-shadow: var(--shadow); }
+    .readout { display: grid; grid-template-columns: repeat(3, minmax(90px, 1fr)); gap: 1px; padding: 18px 26px; }
+    .readout.moon { text-align: right; }
+    .metric { padding: 5px 12px; border-left: 1px solid rgba(117,213,250,.14); min-width: 0; }
+    .moon .metric { border-left: 0; border-right: 1px solid rgba(255,199,96,.17); }
+    .metric small { display: block; color: var(--muted); font-size: 8px; letter-spacing: .16em; white-space: nowrap; margin-bottom: 9px; }
+    .metric b { display: block; font: 600 clamp(12px,1.35vw,18px) Arial, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .earth .metric b { color: var(--cyan2); }
+    .moon .metric b { color: #ffe0a0; }
+    .control { width: 176px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 13px 16px; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .launch { appearance: none; border: 1px solid var(--cyan); background: rgba(67,214,244,.10); color: #dffbff; height: 43px; cursor: pointer; letter-spacing: .17em; font-weight: 800; font-size: 10px; transition: .2s ease; position: relative; overflow: hidden; }
+    .launch:hover { background: rgba(67,214,244,.24); box-shadow: 0 0 25px rgba(67,214,244,.18); }
+    .launch:disabled { opacity: .45; cursor: default; }
+    .mini-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .mini-controls button { border: 1px solid rgba(157,211,234,.18); color: var(--muted); background: transparent; height: 25px; font-size: 8px; letter-spacing: .12em; cursor: pointer; }
+    .mini-controls button:hover { color: white; border-color: rgba(157,211,234,.45); }
+
+    .hint { position: fixed; z-index: 8; left: 50%; bottom: 127px; transform: translateX(-50%); color: rgba(183,215,230,.62); font-size: 8px; letter-spacing: .17em; pointer-events: none; white-space: nowrap; }
+    .status-banner { position: fixed; z-index: 8; left: 50%; top: 89px; transform: translateX(-50%); color: var(--cyan2); font-size: 8px; letter-spacing: .22em; background: rgba(1,8,13,.7); padding: 7px 12px; border: 1px solid rgba(88,230,255,.13); }
+
+    #loading { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: #02070c; transition: opacity .6s ease; }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    .loader { text-align: center; width: min(380px, 78vw); }
+    .loader h2 { font: 700 20px Arial; letter-spacing: .28em; margin: 0 0 18px; }
+    .loadbar { height: 2px; background: #10232e; overflow: hidden; }
+    .loadbar i { display: block; height: 100%; width: 0; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); transition: width .25s; }
+    .loader p { font-size: 8px; color: var(--muted); letter-spacing: .18em; }
+
+    @media (max-width: 760px) {
+      header { height: 66px; padding: 0 12px; }
+      .brand span:last-child, .system span:last-child, .title p { display: none; }
+      .world-label { top: 84px; padding: 0 18px; }
+      .planet-name { font-size: 24px; }
+      .gravity-tag { font-size: 7px; gap: 5px; padding: 6px; }
+      .gravity-tag strong { font-size: 11px; }
+      .divider { top: 66px; bottom: 148px; }
+      .telemetry { min-height: 148px; grid-template-columns: 1fr 112px 1fr; }
+      .readout { grid-template-columns: 1fr; padding: 9px 7px; gap: 0; }
+      .metric { padding: 3px 6px; }
+      .metric small { margin-bottom: 2px; font-size: 6px; }
+      .metric b { font-size: 11px; }
+      .control { width: 112px; padding: 12px 7px; }
+      .launch { letter-spacing: .06em; }
+      .hint { bottom: 154px; }
+      .gauge { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="stage" aria-label="Earth and Moon gravity comparison 3D simulation"></div>
+  <div class="noise"></div><div class="scanlines"></div>
+
+  <div id="loading"><div class="loader"><h2>DANTE LABS</h2><div class="loadbar"><i id="loadProgress"></i></div><p id="loadText">INITIALIZING ORBITAL LAB // 0%</p></div></div>
+
+  <header>
+    <div class="brand"><div class="brand-mark"><span>DL</span></div><span>DANTE LABS</span></div>
+    <div class="title"><h1>GRAVITY / JUMP LAB</h1><p>SAME FORCE · DIFFERENT WORLD</p></div>
+    <div class="system"><span class="dot"></span><span>SIM CORE ONLINE</span></div>
+  </header>
+
+  <div class="world-label earth">
+    <span class="planet-index">ENVIRONMENT 01 // HOMEWORLD</span>
+    <span class="planet-name">EARTH</span>
+    <span class="gravity-tag">GRAVITY <strong>9.81</strong> m/s²</span>
+  </div>
+  <div class="world-label moon">
+    <span class="planet-index">ENVIRONMENT 02 // LUNAR SURFACE</span>
+    <span class="planet-name">MOON</span>
+    <span class="gravity-tag">GRAVITY <strong>1.62</strong> m/s²</span>
+  </div>
+  <div class="divider"></div><div class="vs">VS</div>
+  <div class="status-banner" id="statusBanner">SYSTEM READY // AWAITING INPUT</div>
+  <div class="hint">[SPACE] LAUNCH · [R] RESET · DRAG TO INSPECT</div>
+
+  <div class="gauge left" aria-hidden="true">
+    <div class="tick"><span>8m</span></div><div class="tick"><span>6m</span></div><div class="tick"><span>4m</span></div><div class="tick"><span>2m</span></div><div class="tick"><span>0m</span></div>
+  </div>
+  <div class="gauge right" aria-hidden="true">
+    <div class="tick"><span>8m</span></div><div class="tick"><span>6m</span></div><div class="tick"><span>4m</span></div><div class="tick"><span>2m</span></div><div class="tick"><span>0m</span></div>
+  </div>
+
+  <section class="telemetry" aria-label="Live telemetry">
+    <div class="readout earth">
+      <div class="metric"><small>[EARTH] JUMP_APEX_M</small><b id="eApex">0.00 m</b></div>
+      <div class="metric"><small>[EARTH] FALL_TIME_S</small><b id="eTime">0.00 s</b></div>
+      <div class="metric"><small>[EARTH] STATUS</small><b id="eStatus">LANDED</b></div>
+    </div>
+    <div class="control">
+      <button class="launch" id="launchBtn">RUN EXPERIMENT</button>
+      <div class="mini-controls"><button id="resetBtn">RESET</button><button id="viewBtn">VIEW +</button></div>
+    </div>
+    <div class="readout moon">
+      <div class="metric"><small>[MOON] JUMP_APEX_M</small><b id="mApex">0.00 m</b></div>
+      <div class="metric"><small>[MOON] FALL_TIME_S</small><b id="mTime">0.00 s</b></div>
+      <div class="metric"><small>[MOON] STATUS</small><b id="mStatus">LANDED</b></div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js"></script>
+  <script>
+    (() => {
+      'use strict';
+
+      const CONFIG = {
+        launchVelocity: 4.5,
+        earth: { gravity: 9.81, accent: 0x58e6ff },
+        moon:  { gravity: 1.62, accent: 0xffc760 },
+        visualMeters: 0.72,
+        simRate: 1.0,
+        groundY: -1.45
+      };
+
+      const refs = {
+        stage: document.getElementById('stage'), loading: document.getElementById('loading'),
+        progress: document.getElementById('loadProgress'), loadText: document.getElementById('loadText'),
+        launch: document.getElementById('launchBtn'), reset: document.getElementById('resetBtn'), view: document.getElementById('viewBtn'),
+        banner: document.getElementById('statusBanner'),
+        eApex: document.getElementById('eApex'), eTime: document.getElementById('eTime'), eStatus: document.getElementById('eStatus'),
+        mApex: document.getElementById('mApex'), mTime: document.getElementById('mTime'), mStatus: document.getElementById('mStatus')
+      };
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+      renderer.setSize(innerWidth, innerHeight);
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.autoClear = false;
+      renderer.domElement.style.width = '100%';
+      renderer.domElement.style.height = '100%';
+      refs.stage.appendChild(renderer.domElement);
+
+      const worlds = {};
+      const clock = new THREE.Clock();
+      let running = false, elapsed = 0, dragX = 0, targetDragX = 0, viewMode = 0;
+
+      const starTexture = createStarTexture();
+
+      function makeWorld(kind) {
+        const isEarth = kind === 'earth';
+        const cfg = CONFIG[kind];
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(isEarth ? 0x07131c : 0x080a0d);
+        scene.fog = new THREE.FogExp2(isEarth ? 0x07131c : 0x080a0d, isEarth ? 0.018 : 0.026);
+
+        const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 120);
+        camera.position.set(isEarth ? 7.5 : -7.5, 3.1, 13.4);
+        camera.lookAt(0, 1.8, 0);
+
+        const hemi = new THREE.HemisphereLight(isEarth ? 0x9edfff : 0xa6b0c6, isEarth ? 0x102a18 : 0x171717, isEarth ? 1.05 : .62);
+        scene.add(hemi);
+        const key = new THREE.DirectionalLight(isEarth ? 0xe2f6ff : 0xffffff, isEarth ? 1.5 : 1.85);
+        key.position.set(isEarth ? -7 : 8, 10, 8); key.castShadow = true;
+        key.shadow.mapSize.set(1024,1024); key.shadow.camera.left=-8; key.shadow.camera.right=8; key.shadow.camera.top=12; key.shadow.camera.bottom=-4;
+        scene.add(key);
+        const rim = new THREE.PointLight(cfg.accent, isEarth ? 1.3 : .8, 18);
+        rim.position.set(isEarth ? 5 : -5, 2, 3); scene.add(rim);
+
+        const stars = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ map: starTexture, size: .13, transparent: true, opacity: isEarth ? .25 : .72, depthWrite: false }));
+        const starPositions = [];
+        const rng = mulberry32(isEarth ? 112 : 218);
+        for (let i=0;i<480;i++) starPositions.push((rng()-.5)*70, rng()*34-3, (rng()-.5)*45-8);
+        stars.geometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions,3));
+        scene.add(stars);
+
+        const ground = createGround(kind);
+        ground.position.y = CONFIG.groundY;
+        scene.add(ground);
+
+        const astronautRoot = new THREE.Group();
+        astronautRoot.position.set(0, CONFIG.groundY, 0);
+        scene.add(astronautRoot);
+
+        const marker = createHeightMarker(cfg.accent);
+        marker.position.set(isEarth ? -2.45 : 2.45, CONFIG.groundY + .03, 0);
+        scene.add(marker);
+
+        const ring = new THREE.Mesh(new THREE.RingGeometry(.75,.79,64), new THREE.MeshBasicMaterial({color:cfg.accent, transparent:true, opacity:.42, side:THREE.DoubleSide}));
+        ring.rotation.x = -Math.PI/2; ring.position.y = CONFIG.groundY+.018; scene.add(ring);
+
+        const landingGlow = new THREE.Mesh(new THREE.CircleGeometry(1.15,64), new THREE.MeshBasicMaterial({color:cfg.accent, transparent:true, opacity:.0, depthWrite:false}));
+        landingGlow.rotation.x = -Math.PI/2; landingGlow.position.y = CONFIG.groundY+.025; scene.add(landingGlow);
+
+        return { kind, scene, camera, astronautRoot, marker, ring, landingGlow, stars, landed: true, landingPulse: 0, currentHeight: 0 };
+      }
+
+      function createGround(kind) {
+        const isEarth = kind === 'earth';
+        const group = new THREE.Group();
+        const geo = new THREE.PlaneGeometry(80, 55, 90, 60);
+        const pos = geo.attributes.position;
+        const rng = mulberry32(isEarth ? 337 : 991);
+        for (let i=0;i<pos.count;i++) {
+          const x=pos.getX(i), y=pos.getY(i);
+          const edge = Math.min(1, Math.abs(x)/35 + Math.abs(y)/25);
+          const wave = isEarth ? Math.sin(x*.33)*.18 + Math.cos(y*.25)*.13 : Math.sin(x*.46+y*.18)*.28;
+          pos.setZ(i, wave + (rng()-.5)*(isEarth?.18:.43)*edge);
+        }
+        geo.computeVertexNormals();
+        const mat = new THREE.MeshStandardMaterial({ color: isEarth ? 0x152f24 : 0x5c5e60, roughness: .96, metalness: .02 });
+        const land = new THREE.Mesh(geo, mat); land.rotation.x=-Math.PI/2; land.receiveShadow=true; group.add(land);
+
+        if (isEarth) {
+          for(let i=0;i<90;i++) {
+            const blade = new THREE.Mesh(new THREE.ConeGeometry(.025,.26+Math.random()*.24,3), new THREE.MeshStandardMaterial({color:i%3?0x315b3c:0x73975f,roughness:1}));
+            const a=Math.random()*Math.PI*2, r=1.2+Math.random()*12; blade.position.set(Math.cos(a)*r,.13,Math.sin(a)*r); blade.rotation.z=(Math.random()-.5)*.2; group.add(blade);
+          }
+          const distant = new THREE.Mesh(new THREE.CylinderGeometry(23,27,1.4,64,1,true), new THREE.MeshStandardMaterial({color:0x10261e,roughness:1}));
+          distant.position.set(0,-.55,-4); group.add(distant);
+        } else {
+          const rng2=mulberry32(810);
+          for(let i=0;i<34;i++) {
+            const r=.12+rng2()*.85;
+            const crater = new THREE.Mesh(new THREE.TorusGeometry(r,r*.10,7,32), new THREE.MeshStandardMaterial({color:0x3f4143,roughness:1}));
+            crater.rotation.x=Math.PI/2; crater.position.set((rng2()-.5)*22,.035,(rng2()-.5)*18); crater.scale.y=.55; group.add(crater);
+          }
+        }
+        return group;
+      }
+
+      function createHeightMarker(color) {
+        const g = new THREE.Group();
+        const lineMat = new THREE.LineBasicMaterial({color, transparent:true, opacity:.35});
+        const pts=[]; for(let i=0;i<=8;i++){ pts.push(new THREE.Vector3(0,i*CONFIG.visualMeters,0)); }
+        const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([pts[0],pts[pts.length-1]]),lineMat); g.add(line);
+        for(let i=0;i<=8;i++) {
+          const len=i%2===0?.33:.18;
+          const tick=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-len/2,i*CONFIG.visualMeters,0),new THREE.Vector3(len/2,i*CONFIG.visualMeters,0)]),lineMat); g.add(tick);
+        }
+        return g;
+      }
+
+      function createStarTexture(){
+        const c=document.createElement('canvas'); c.width=c.height=32; const x=c.getContext('2d');
+        const grad=x.createRadialGradient(16,16,0,16,16,16); grad.addColorStop(0,'rgba(255,255,255,1)'); grad.addColorStop(.2,'rgba(205,238,255,.9)'); grad.addColorStop(1,'rgba(255,255,255,0)'); x.fillStyle=grad; x.fillRect(0,0,32,32); return new THREE.CanvasTexture(c);
+      }
+
+      function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296; }; }
+
+      worlds.earth = makeWorld('earth');
+      worlds.moon = makeWorld('moon');
+
+      const manager = new THREE.LoadingManager();
+      manager.onProgress = (_, loaded, total) => {
+        const p = Math.round((loaded/total)*100); refs.progress.style.width = p+'%'; refs.loadText.textContent = `CALIBRATING ASSETS // ${p}%`;
+      };
+      manager.onLoad = finishLoading;
+      manager.onError = () => { refs.loadText.textContent = 'REMOTE MODEL UNAVAILABLE // USING LAB PROXY'; useFallbackAstronauts(); finishLoading(); };
+
+      let modelResolved = false;
+      const loader = new THREE.GLTFLoader(manager);
+      loader.load('https://modelviewer.dev/shared-assets/models/Astronaut.glb', gltf => {
+        modelResolved = true;
+        const base = gltf.scene;
+        base.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.receiveShadow=true; if(o.material){ o.material=o.material.clone(); o.material.roughness=Math.max(.42,o.material.roughness||.5); } } });
+        base.scale.setScalar(1.58);
+        const box=new THREE.Box3().setFromObject(base); base.position.y=-box.min.y;
+        worlds.earth.astronautRoot.add(base.clone(true));
+        worlds.moon.astronautRoot.add(base.clone(true));
+      }, undefined, () => {
+        if(!modelResolved) useFallbackAstronauts();
+      });
+
+      const safety = setTimeout(()=>{ if(!modelResolved){ useFallbackAstronauts(); finishLoading(); } }, 6500);
+      function finishLoading(){ clearTimeout(safety); setTimeout(()=>refs.loading.classList.add('hidden'),350); }
+
+      function useFallbackAstronauts(){
+        if(modelResolved) return; modelResolved=true;
+        ['earth','moon'].forEach(k=>worlds[k].astronautRoot.add(makeFallbackAstronaut()));
+      }
+
+      function makeFallbackAstronaut(){
+        const g=new THREE.Group(), white=new THREE.MeshStandardMaterial({color:0xdce4e7,roughness:.55,metalness:.08}), dark=new THREE.MeshStandardMaterial({color:0x18232c,roughness:.28,metalness:.5}), visor=new THREE.MeshStandardMaterial({color:0x152f41,roughness:.08,metalness:.85});
+        const body=new THREE.Mesh(new THREE.CapsuleGeometry(.39,.65,8,16),white); body.position.y=1.05; body.castShadow=true; g.add(body);
+        const head=new THREE.Mesh(new THREE.SphereGeometry(.38,24,16),white); head.position.y=1.78; head.castShadow=true; g.add(head);
+        const face=new THREE.Mesh(new THREE.SphereGeometry(.31,24,16,0,Math.PI*2,0,Math.PI*.54),visor); face.rotation.x=Math.PI/2; face.position.set(0,1.78,.17); g.add(face);
+        [[-.23,.38],[.23,.38]].forEach(([x,y])=>{const l=new THREE.Mesh(new THREE.CapsuleGeometry(.12,.48,5,10),white);l.position.set(x,y,0);l.castShadow=true;g.add(l);const b=new THREE.Mesh(new THREE.BoxGeometry(.25,.16,.42),dark);b.position.set(x,.08,.1);g.add(b);});
+        [[-.5,1.1],[.5,1.1]].forEach(([x,y],i)=>{const a=new THREE.Mesh(new THREE.CapsuleGeometry(.105,.55,5,10),white);a.position.set(x,y,0);a.rotation.z=i?-.3:.3;a.castShadow=true;g.add(a);});
+        return g;
+      }
+
+      const theoretical = {};
+      ['earth','moon'].forEach(k=>{
+        const g=CONFIG[k].gravity, v=CONFIG.launchVelocity;
+        theoretical[k]={ apex:v*v/(2*g), flight:2*v/g };
+      });
+
+      function launch(){
+        if(running) return;
+        reset(false); running=true; elapsed=0; refs.launch.disabled=true; refs.launch.textContent='EXPERIMENT ACTIVE'; refs.banner.textContent='SYNCHRONIZED LAUNCH // T+ 0.00 s';
+        ['earth','moon'].forEach(k=>{worlds[k].landed=false; setStatus(k,'ASCENDING');});
+      }
+
+      function reset(updateBanner=true){
+        running=false; elapsed=0; refs.launch.disabled=false; refs.launch.textContent='RUN EXPERIMENT';
+        ['earth','moon'].forEach(k=>{const w=worlds[k];w.currentHeight=0;w.landed=true;w.landingPulse=0;w.astronautRoot.position.y=CONFIG.groundY;w.astronautRoot.rotation.set(0,0,0);w.landingGlow.material.opacity=0;setMetric(k,0,0);setStatus(k,'LANDED');});
+        if(updateBanner) refs.banner.textContent='SYSTEM READY // AWAITING INPUT';
+      }
+
+      function setMetric(k,h,t){
+        const p=k==='earth'?'e':'m'; refs[p+'Apex'].textContent=h.toFixed(2)+' m'; refs[p+'Time'].textContent=t.toFixed(2)+' s';
+      }
+      function setStatus(k,s){ refs[(k==='earth'?'e':'m')+'Status'].textContent=s; }
+
+      function updateSimulation(dt){
+        if(running){
+          elapsed += Math.min(dt,.035)*CONFIG.simRate;
+          refs.banner.textContent=`SYNCHRONIZED EXPERIMENT // T+ ${elapsed.toFixed(2)} s`;
+          let allLanded=true;
+          ['earth','moon'].forEach(k=>{
+            const w=worlds[k], data=theoretical[k];
+            if(!w.landed){
+              allLanded=false;
+              const h=Math.max(0,CONFIG.launchVelocity*elapsed-.5*CONFIG[k].gravity*elapsed*elapsed);
+              w.currentHeight=h; w.astronautRoot.position.y=CONFIG.groundY+h*CONFIG.visualMeters;
+              const verticalVelocity=CONFIG.launchVelocity-CONFIG[k].gravity*elapsed;
+              setStatus(k,verticalVelocity>0?'ASCENDING':'DESCENDING');
+              setMetric(k,Math.min(h,data.apex),Math.min(elapsed,data.flight));
+              w.astronautRoot.rotation.z=Math.sin(Math.min(1,elapsed/data.flight)*Math.PI)*(.055*(k==='earth'?1:-1));
+              if(elapsed>=data.flight){
+                w.landed=true; w.currentHeight=0; w.astronautRoot.position.y=CONFIG.groundY; w.astronautRoot.rotation.z=0; w.landingPulse=1; setMetric(k,data.apex,data.flight); setStatus(k,'LANDED');
+              }
+            }
+          });
+          if(allLanded){ running=false; refs.launch.disabled=false; refs.launch.textContent='RUN AGAIN'; refs.banner.textContent='EXPERIMENT COMPLETE // DATA LOCKED'; }
+        }
+
+        ['earth','moon'].forEach(k=>{
+          const w=worlds[k];
+          w.ring.rotation.z += dt*(k==='earth'?.12:-.08);
+          w.stars.rotation.y += dt*(k==='earth'?.002:.004);
+          if(w.landingPulse>0){ w.landingPulse=Math.max(0,w.landingPulse-dt*1.6); w.landingGlow.material.opacity=w.landingPulse*.25; w.landingGlow.scale.setScalar(1+(1-w.landingPulse)*2.7); }
+        });
+      }
+
+      function render(){
+        requestAnimationFrame(render);
+        const dt=clock.getDelta(); updateSimulation(dt);
+        dragX += (targetDragX-dragX)*.07;
+        renderer.setScissorTest(true); renderer.clear();
+        const width=innerWidth, height=innerHeight, headerH=innerWidth<760?66:78, footerH=innerWidth<760?148:118;
+        const sceneH=height-headerH-footerH;
+        ['earth','moon'].forEach((k,i)=>{
+          const w=worlds[k], x=i===0?0:Math.floor(width/2), paneW=i===0?Math.floor(width/2):Math.ceil(width/2);
+          renderer.setViewport(x,footerH,paneW,sceneH); renderer.setScissor(x,footerH,paneW,sceneH);
+          w.camera.aspect=paneW/sceneH;
+          const side=k==='earth'?1:-1;
+          const radius=viewMode?15.8:15.4, angle=side*.48+dragX*.45;
+          w.camera.position.x=Math.sin(angle)*radius; w.camera.position.z=Math.cos(angle)*radius; w.camera.position.y=viewMode?5.0:3.3;
+          w.camera.lookAt(0,viewMode?2.1:1.65,0); w.camera.updateProjectionMatrix(); renderer.render(w.scene,w.camera);
+        });
+        renderer.setScissorTest(false);
+      }
+
+      refs.launch.addEventListener('click',launch); refs.reset.addEventListener('click',()=>reset(true));
+      refs.view.addEventListener('click',()=>{viewMode=1-viewMode;refs.view.textContent=viewMode?'VIEW −':'VIEW +';});
+      addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();launch();}if(e.key.toLowerCase()==='r')reset(true);});
+      addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));});
+      let dragging=false,lastX=0;
+      renderer.domElement.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;});
+      addEventListener('pointermove',e=>{if(dragging){targetDragX+=(e.clientX-lastX)/innerWidth;targetDragX=Math.max(-.75,Math.min(.75,targetDragX));lastX=e.clientX;}});
+      addEventListener('pointerup',()=>dragging=false);
+
+      window.__DANTE_LABS__ = { CONFIG, theoretical, worlds, launch, reset, getState:()=>({running,elapsed,earth:{height:worlds.earth.currentHeight,landed:worlds.earth.landed},moon:{height:worlds.moon.currentHeight,landed:worlds.moon.landed}}) };
+      reset(); render();
+    })();
+  </script>
+</body>
+</html>

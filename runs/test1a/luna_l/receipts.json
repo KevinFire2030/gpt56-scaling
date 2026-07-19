@@ -1,0 +1,263 @@
+[
+  {
+    "receipt_id": "R001",
+    "store_name": "카페 한잔의 여유",
+    "date": "2026-06-02",
+    "items": [
+      {"name": "아메리카노", "qty": 2, "unit_price": 4500, "amount": 9000},
+      {"name": "크루아상", "qty": 1, "unit_price": 3800, "amount": 3800}
+    ],
+    "subtotal": 12800,
+    "tax": 1280,
+    "total": 14080,
+    "flags": []
+  },
+  {
+    "receipt_id": "R002",
+    "store_name": "다온분식",
+    "date": "2026-06-03",
+    "items": [
+      {"name": "떡볶이", "qty": 1, "unit_price": 5000, "amount": 5000},
+      {"name": "김말이", "qty": 2, "unit_price": 1500, "amount": 3000},
+      {"name": "어묵", "qty": 3, "unit_price": 1000, "amount": 3000}
+    ],
+    "subtotal": 11000,
+    "tax": 1100,
+    "total": 12100,
+    "flags": []
+  },
+  {
+    "receipt_id": "R003",
+    "store_name": "GS편의점 서초점",
+    "date": "2026-06-05",
+    "items": [
+      {"name": "삼각김밥", "qty": 2, "unit_price": 1200, "amount": 2400},
+      {"name": "바나나우유", "qty": 1, "unit_price": 1700, "amount": 1700}
+    ],
+    "subtotal": 4100,
+    "tax": 410,
+    "total": 4510,
+    "flags": []
+  },
+  {
+    "receipt_id": "R004",
+    "store_name": "명동칼국수",
+    "date": "2026-06-06",
+    "items": [
+      {"name": "칼국수", "qty": 2, "unit_price": 9000, "amount": 18000},
+      {"name": "만두", "qty": 1, "unit_price": 7000, "amount": 7000}
+    ],
+    "subtotal": 25000,
+    "tax": 2500,
+    "total": 28500,
+    "flags": ["소계 25,000원과 부가세 2,500원을 합산한 값(27,500원)이 영수증 합계 28,500원과 일치하지 않음"]
+  },
+  {
+    "receipt_id": "R005",
+    "store_name": "스시혼마",
+    "date": "2026-06-08",
+    "items": [
+      {"name": "모듬초밥", "qty": 1, "unit_price": 18000, "amount": 18000},
+      {"name": "미소시루", "qty": 1, "unit_price": 2000, "amount": 2000}
+    ],
+    "subtotal": 20000,
+    "tax": 2000,
+    "total": 22000,
+    "flags": []
+  },
+  {
+    "receipt_id": "R006",
+    "store_name": "커피빈 강남",
+    "date": "2026-06-09",
+    "items": [
+      {"name": "아메리카노", "qty": 1, "unit_price": 5100, "amount": 5100},
+      {"name": "카페라떼", "qty": 2, "unit_price": 5600, "amount": 11200}
+    ],
+    "subtotal": 16300,
+    "tax": 1630,
+    "total": 17930,
+    "flags": []
+  },
+  {
+    "receipt_id": "R007",
+    "store_name": "한우정육식당",
+    "date": "2026-06-10",
+    "items": [
+      {"name": "등심 150g", "qty": 2, "unit_price": 45000, "amount": 90000},
+      {"name": "된장찌개", "qty": 1, "unit_price": 8000, "amount": 8000}
+    ],
+    "subtotal": 98000,
+    "tax": 9800,
+    "total": 107800,
+    "flags": ["영수증에 금액단위가 천원으로 표시되어 원 단위로 환산함"]
+  },
+  {
+    "receipt_id": "R008",
+    "store_name": "파리바게뜨 역삼점",
+    "date": "2026-06-11",
+    "items": [
+      {"name": "소보로빵", "qty": 3, "unit_price": 2200, "amount": 6600},
+      {"name": "우유식빵", "qty": 1, "unit_price": 3900, "amount": 3900}
+    ],
+    "subtotal": 10500,
+    "tax": 1050,
+    "total": 11550,
+    "flags": []
+  },
+  {
+    "receipt_id": "R009",
+    "store_name": "교촌치킨 서초점",
+    "date": "2026-06-12",
+    "items": [
+      {"name": "허니콤보", "qty": 1, "unit_price": 23000, "amount": 23000},
+      {"name": "콜라 1.25L", "qty": 1, "unit_price": 3000, "amount": 3000}
+    ],
+    "subtotal": 26000,
+    "tax": 2600,
+    "total": 28600,
+    "flags": []
+  },
+  {
+    "receipt_id": "R010",
+    "store_name": "올리브영 강남본점",
+    "date": "2026-06-13",
+    "items": [
+      {"name": "선크림", "qty": 1, "unit_price": 18900, "amount": 18900},
+      {"name": "립밤", "qty": 2, "unit_price": 6500, "amount": 13000}
+    ],
+    "subtotal": 31900,
+    "tax": 3190,
+    "total": 35090,
+    "flags": []
+  },
+  {
+    "receipt_id": "R011",
+    "store_name": "홍콩반점 서초",
+    "date": "2026-06-15",
+    "items": [
+      {"name": "짜장면", "qty": 2, "unit_price": 7000, "amount": 14000},
+      {"name": "탕수육(소)", "qty": 1, "unit_price": 15000, "amount": 15000}
+    ],
+    "subtotal": 27000,
+    "tax": 2900,
+    "total": 29900,
+    "flags": ["품목 금액 합계 29,000원과 영수증 소계 27,000원이 일치하지 않음"]
+  },
+  {
+    "receipt_id": "R012",
+    "store_name": "스타벅스 R점",
+    "date": "2026-06-16",
+    "items": [
+      {"name": "콜드브루", "qty": 2, "unit_price": 5800, "amount": 11600},
+      {"name": "치즈케이크", "qty": 1, "unit_price": 7300, "amount": 7300}
+    ],
+    "subtotal": 18900,
+    "tax": 1890,
+    "total": 20790,
+    "flags": []
+  },
+  {
+    "receipt_id": "R013",
+    "store_name": "맘터치 서초역점",
+    "date": "2026-06-17",
+    "items": [
+      {"name": "불고기버거세트", "qty": 2, "unit_price": 8900, "amount": 17800},
+      {"name": "케이준감자", "qty": 1, "unit_price": 3400, "amount": 3400}
+    ],
+    "subtotal": 21200,
+    "tax": 2120,
+    "total": 23320,
+    "flags": []
+  },
+  {
+    "receipt_id": "R014",
+    "store_name": "The Bread Lab",
+    "date": "2026-06-18",
+    "items": [
+      {"name": "Sourdough", "qty": 1, "unit_price": 7500, "amount": 7500},
+      {"name": "Butter Croissant", "qty": 2, "unit_price": 4200, "amount": 8400}
+    ],
+    "subtotal": 15900,
+    "tax": 1590,
+    "total": 17490,
+    "flags": ["영수증 금액 표기가 KRW로 되어 있어 원 단위 정수로 기록함"]
+  },
+  {
+    "receipt_id": "R015",
+    "store_name": "김밥천국 교대점",
+    "date": "2026-06-19",
+    "items": [
+      {"name": "참치김밥", "qty": 2, "unit_price": 4500, "amount": 9000},
+      {"name": "라볶이", "qty": 1, "unit_price": 6000, "amount": 6000}
+    ],
+    "subtotal": 15000,
+    "tax": 1500,
+    "total": 16500,
+    "flags": []
+  },
+  {
+    "receipt_id": "R016",
+    "store_name": "이마트24 방배점",
+    "date": "2026-06-20",
+    "items": [
+      {"name": "생수 2L", "qty": 2, "unit_price": 1400, "amount": 2800},
+      {"name": "컵라면", "qty": 3, "unit_price": 1300, "amount": 3900}
+    ],
+    "subtotal": 6700,
+    "tax": 670,
+    "total": 7370,
+    "flags": []
+  },
+  {
+    "receipt_id": "R017",
+    "store_name": "본죽 서초점",
+    "date": "2026-06-22",
+    "items": [
+      {"name": "전복죽", "qty": 1, "unit_price": 12000, "amount": 12000},
+      {"name": "소고기죽", "qty": 1, "unit_price": 10500, "amount": 10500}
+    ],
+    "subtotal": 22500,
+    "tax": 1250,
+    "total": 23750,
+    "flags": []
+  },
+  {
+    "receipt_id": "R018",
+    "store_name": "배스킨라빈스 서초점",
+    "date": "2026-06-23",
+    "items": [
+      {"name": "파인트", "qty": 1, "unit_price": 9800, "amount": 9800},
+      {"name": "싱글콘", "qty": 2, "unit_price": 4000, "amount": 8000}
+    ],
+    "subtotal": 17800,
+    "tax": 1780,
+    "total": 19580,
+    "flags": []
+  },
+  {
+    "receipt_id": "R019",
+    "store_name": "동네수제버거",
+    "date": "2026-06-25",
+    "items": [
+      {"name": "치즈버거", "qty": 2, "unit_price": 8500, "amount": 17000},
+      {"name": "감자튀김", "qty": null, "unit_price": 4500, "amount": 4500}
+    ],
+    "subtotal": 21500,
+    "tax": 2150,
+    "total": 23650,
+    "flags": ["감자튀김 행의 수량이 얼룩에 가려져 읽을 수 없음"]
+  },
+  {
+    "receipt_id": "R020",
+    "store_name": "다이소 서초점",
+    "date": "2026-06-26",
+    "items": [
+      {"name": "건전지 AA", "qty": 2, "unit_price": 3000, "amount": 6000},
+      {"name": "수납박스", "qty": 1, "unit_price": 5000, "amount": 5000}
+    ],
+    "subtotal": 11000,
+    "tax": 1100,
+    "total": 12100,
+    "flags": []
+  }
+]

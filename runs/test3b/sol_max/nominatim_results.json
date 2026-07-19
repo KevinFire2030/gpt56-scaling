@@ -1,0 +1,733 @@
+{
+  "샛강역": [
+    {
+      "place_id": 223078171,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12372984520,
+      "lat": "37.5177651",
+      "lon": "126.9284134",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "샛강역 1번출구 앞",
+      "display_name": "샛강역 1번출구 앞, 의사당대로, 여의도동, 여의동, 영등포구, 서울특별시, 07331, 대한민국",
+      "boundingbox": [
+        "37.5177151",
+        "37.5178151",
+        "126.9283634",
+        "126.9284634"
+      ]
+    }
+  ],
+  "대방역": [
+    {
+      "place_id": 222955816,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357860037,
+      "lat": "37.5136467",
+      "lon": "126.9260524",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "대방역",
+      "display_name": "대방역, 여의대방로, 신길7동, 영등포구, 서울특별시, 06938, 대한민국",
+      "boundingbox": [
+        "37.5135967",
+        "37.5136967",
+        "126.9260024",
+        "126.9261024"
+      ]
+    },
+    {
+      "place_id": 223270477,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357892439,
+      "lat": "37.5127676",
+      "lon": "126.9245377",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "대방역",
+      "display_name": "대방역, 영등포로, 신길7동, 영등포구, 서울특별시, 07354, 대한민국",
+      "boundingbox": [
+        "37.5127176",
+        "37.5128176",
+        "126.9244877",
+        "126.9245877"
+      ]
+    },
+    {
+      "place_id": 220368501,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 11684169441,
+      "lat": "37.5129352",
+      "lon": "126.9235038",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "대방역",
+      "display_name": "대방역, 영등포로, 신길1동, 영등포구, 서울특별시, 07354, 대한민국",
+      "boundingbox": [
+        "37.5128852",
+        "37.5129852",
+        "126.9234538",
+        "126.9235538"
+      ]
+    }
+  ],
+  "서울지방병무청역": [],
+  "보라매역": [
+    {
+      "place_id": 222532132,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357926726,
+      "lat": "37.4997200",
+      "lon": "126.9197200",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "보라매역",
+      "display_name": "보라매역, 여의대방로29길, 신길6동, 영등포구, 서울특별시, 07432, 대한민국",
+      "boundingbox": [
+        "37.4996700",
+        "37.4997700",
+        "126.9196700",
+        "126.9197700"
+      ]
+    }
+  ],
+  "보라매공원역": [
+    {
+      "place_id": 223314650,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12372983052,
+      "lat": "37.4958229",
+      "lon": "126.9178162",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "보라매공원역 2번출구",
+      "display_name": "보라매공원역 2번출구, 385-18, 여의대방로20길, 신대방동, 신대방2동, 동작구, 서울특별시, 07433, 대한민국",
+      "boundingbox": [
+        "37.4957729",
+        "37.4958729",
+        "126.9177662",
+        "126.9178662"
+      ]
+    }
+  ],
+  "보라매병원역": [
+    {
+      "place_id": 419008623,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 13890054571,
+      "lat": "37.4926570",
+      "lon": "126.9245000",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "보라매병원역 2번출구",
+      "display_name": "보라매병원역 2번출구, 15, 보라매로5길, 신대방동, 신대방2동, 동작구, 서울특별시, 07071, 대한민국",
+      "boundingbox": [
+        "37.4926070",
+        "37.4927070",
+        "126.9244500",
+        "126.9245500"
+      ]
+    },
+    {
+      "place_id": 222427023,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12372983882,
+      "lat": "37.4932213",
+      "lon": "126.9234314",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "보라매병원역 1번출구",
+      "display_name": "보라매병원역 1번출구, 보라매로5길, 신대방동, 신대방2동, 동작구, 서울특별시, 07071, 대한민국",
+      "boundingbox": [
+        "37.4931713",
+        "37.4932713",
+        "126.9233814",
+        "126.9234814"
+      ]
+    }
+  ],
+  "당곡역": [
+    {
+      "place_id": 224221472,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357914112,
+      "lat": "37.4893988",
+      "lon": "126.9271473",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "당곡역",
+      "display_name": "당곡역, 봉천로, 신림동, 관악구, 서울특별시, 08707, 대한민국",
+      "boundingbox": [
+        "37.4893488",
+        "37.4894488",
+        "126.9270973",
+        "126.9271973"
+      ]
+    }
+  ],
+  "신림역": [
+    {
+      "place_id": 223311747,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 9605360940,
+      "lat": "37.4851675",
+      "lon": "126.9296268",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "신림역",
+      "display_name": "신림역, 신림로, 신림동, 관악구, 서울특별시, 08753, 대한민국",
+      "boundingbox": [
+        "37.4851175",
+        "37.4852175",
+        "126.9295768",
+        "126.9296768"
+      ]
+    },
+    {
+      "place_id": 271248906,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 9295709575,
+      "lat": "37.2170610",
+      "lon": "128.0898940",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 5.8555733577432175e-05,
+      "addresstype": "highway",
+      "name": "신림역",
+      "display_name": "신림역, 제원로, 신림면, 원주시, 강원특별자치도, 26506, 대한민국",
+      "boundingbox": [
+        "37.2170110",
+        "37.2171110",
+        "128.0898440",
+        "128.0899440"
+      ]
+    }
+  ],
+  "서원역": [
+    {
+      "place_id": 222548957,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357900646,
+      "lat": "37.4780091",
+      "lon": "126.9323984",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "서원역",
+      "display_name": "서원역, 문성로, 서원동, 관악구, 서울특별시, 08781, 대한민국",
+      "boundingbox": [
+        "37.4779591",
+        "37.4780591",
+        "126.9323484",
+        "126.9324484"
+      ]
+    }
+  ],
+  "서울대벤처타운역": [
+    {
+      "place_id": 418450398,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 13890054681,
+      "lat": "37.4722020",
+      "lon": "126.9339070",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "서울대벤처타운역",
+      "display_name": "서울대벤처타운역, 110-10, 신림로, 서림동, 관악구, 서울특별시, 08828, 대한민국",
+      "boundingbox": [
+        "37.4721520",
+        "37.4722520",
+        "126.9338570",
+        "126.9339570"
+      ]
+    },
+    {
+      "place_id": 222841322,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357827813,
+      "lat": "37.4710566",
+      "lon": "126.9337724",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "서울대벤처타운역",
+      "display_name": "서울대벤처타운역, 호암로, 신림동, 대학동, 관악구, 서울특별시, 08821, 대한민국",
+      "boundingbox": [
+        "37.4710066",
+        "37.4711066",
+        "126.9337224",
+        "126.9338224"
+      ]
+    },
+    {
+      "place_id": 223203518,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12372983165,
+      "lat": "37.4721974",
+      "lon": "126.9338142",
+      "category": "amenity",
+      "type": "bicycle_rental",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "amenity",
+      "name": "서울대벤처타운역",
+      "display_name": "서울대벤처타운역, 신림로, 서림동, 관악구, 서울특별시, 08828, 대한민국",
+      "boundingbox": [
+        "37.4721474",
+        "37.4722474",
+        "126.9337642",
+        "126.9338642"
+      ]
+    }
+  ],
+  "관악산역": [],
+  "운정중앙역": [
+    {
+      "place_id": 223511958,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12458588111,
+      "lat": "37.7159678",
+      "lon": "126.7281208",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 5.989394979777245e-05,
+      "addresstype": "highway",
+      "name": "운정중앙역",
+      "display_name": "운정중앙역, 운정지하차도, 동패동, 교하동, 파주시, 경기도, 10903, 대한민국",
+      "boundingbox": [
+        "37.7159178",
+        "37.7160178",
+        "126.7280708",
+        "126.7281708"
+      ]
+    },
+    {
+      "place_id": 223601289,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12237749725,
+      "lat": "37.7161461",
+      "lon": "126.7282857",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 5.989394979777245e-05,
+      "addresstype": "railway",
+      "name": "운정중앙",
+      "display_name": "운정중앙, 운정지하차도, 동패동, 교하동, 파주시, 경기도, 10903, 대한민국",
+      "boundingbox": [
+        "37.7111461",
+        "37.7211461",
+        "126.7232857",
+        "126.7332857"
+      ]
+    }
+  ],
+  "킨텍스역": [
+    {
+      "place_id": 220521650,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 6139304191,
+      "lat": "37.6649857",
+      "lon": "126.7475205",
+      "category": "place",
+      "type": "square",
+      "place_rank": 25,
+      "importance": 0.0667298519874876,
+      "addresstype": "square",
+      "name": "킨텍스역 만남의 광장",
+      "display_name": "킨텍스역 만남의 광장, 송포동, 일산서구, 고양시, 경기도, 10390, 대한민국",
+      "boundingbox": [
+        "37.6649357",
+        "37.6650357",
+        "126.7474705",
+        "126.7475705"
+      ]
+    }
+  ],
+  "대곡역": [
+    {
+      "place_id": 221264089,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 5937907125,
+      "lat": "37.6317813",
+      "lon": "126.8102838",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.4789903552801327,
+      "addresstype": "railway",
+      "name": "대곡",
+      "display_name": "대곡, 71-81, 대주로, 대장동, 능곡동, 덕양구, 고양시, 경기도, 10456, 대한민국",
+      "boundingbox": [
+        "37.6267813",
+        "37.6367813",
+        "126.8052838",
+        "126.8152838"
+      ]
+    },
+    {
+      "place_id": 220503937,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357856868,
+      "lat": "37.6311945",
+      "lon": "126.8120936",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 6.318532082088987e-05,
+      "addresstype": "highway",
+      "name": "대곡역",
+      "display_name": "대곡역, 중앙로, 토당동, 능곡동, 덕양구, 고양시, 경기도, 10456, 대한민국",
+      "boundingbox": [
+        "37.6311445",
+        "37.6312445",
+        "126.8120436",
+        "126.8121436"
+      ]
+    }
+  ],
+  "연신내역": [
+    {
+      "place_id": 223111943,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357962617,
+      "lat": "37.6181449",
+      "lon": "126.9222105",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "연신내역",
+      "display_name": "연신내역, 통일로, 불광동, 불광1동, 은평구, 서울특별시, 03385, 대한민국",
+      "boundingbox": [
+        "37.6180949",
+        "37.6181949",
+        "126.9221605",
+        "126.9222605"
+      ]
+    },
+    {
+      "place_id": 223111918,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 357950767,
+      "lat": "37.6172930",
+      "lon": "126.9225531",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "연신내역",
+      "display_name": "연신내역, 통일로, 대조동, 은평구, 서울특별시, 03351, 대한민국",
+      "boundingbox": [
+        "37.6172430",
+        "37.6173430",
+        "126.9225031",
+        "126.9226031"
+      ]
+    }
+  ],
+  "서울역": [
+    {
+      "place_id": 222676708,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 8574527311,
+      "lat": "37.5554175",
+      "lon": "126.9725862",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.5394595907898287,
+      "addresstype": "railway",
+      "name": "서울역",
+      "display_name": "서울역, 세종대로, 봉래동2가, 회현동, 중구, 서울특별시, 04509, 대한민국",
+      "boundingbox": [
+        "37.5504175",
+        "37.5604175",
+        "126.9675862",
+        "126.9775862"
+      ]
+    },
+    {
+      "place_id": 222789674,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 8414031491,
+      "lat": "37.5548238",
+      "lon": "126.9722165",
+      "category": "railway",
+      "type": "stop",
+      "place_rank": 30,
+      "importance": 0.5394595907898287,
+      "addresstype": "railway",
+      "name": "서울역",
+      "display_name": "서울역, 지하2, 세종대로, 봉래동2가, 회현동, 중구, 서울특별시, 04527, 대한민국",
+      "boundingbox": [
+        "37.5547738",
+        "37.5548738",
+        "126.9721665",
+        "126.9722665"
+      ]
+    },
+    {
+      "place_id": 222596377,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 6036160343,
+      "lat": "37.5528527",
+      "lon": "126.9725721",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.5394595907898287,
+      "addresstype": "railway",
+      "name": "서울역",
+      "display_name": "서울역, 지하392, 한강대로, 동자동, 남영동, 용산구, 서울특별시, 04323, 대한민국",
+      "boundingbox": [
+        "37.5478527",
+        "37.5578527",
+        "126.9675721",
+        "126.9775721"
+      ]
+    }
+  ],
+  "수서역": [
+    {
+      "place_id": 222921364,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 11596545418,
+      "lat": "37.4882235",
+      "lon": "127.1004780",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "수서역",
+      "display_name": "수서역, 밤고개로, 수서동, 강남구, 서울특별시, 06347, 대한민국",
+      "boundingbox": [
+        "37.4881735",
+        "37.4882735",
+        "127.1004280",
+        "127.1005280"
+      ]
+    },
+    {
+      "place_id": 223371306,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 10314528020,
+      "lat": "37.4873396",
+      "lon": "127.1016903",
+      "category": "highway",
+      "type": "traffic_signals",
+      "place_rank": 30,
+      "importance": 7.29800869763793e-05,
+      "addresstype": "highway",
+      "name": "수서역",
+      "display_name": "수서역, 광평로, 수서동, 일원본동, 강남구, 서울특별시, 06352, 대한민국",
+      "boundingbox": [
+        "37.4872896",
+        "37.4873896",
+        "127.1016403",
+        "127.1017403"
+      ]
+    }
+  ],
+  "성남역": [
+    {
+      "place_id": 222844642,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 10787176950,
+      "lat": "37.3936894",
+      "lon": "127.1205842",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.36160342477182406,
+      "addresstype": "railway",
+      "name": "성남",
+      "display_name": "성남, 분당수서로, 판교, 분당구, 성남시, 경기도, 13565, 대한민국",
+      "boundingbox": [
+        "37.3886894",
+        "37.3986894",
+        "127.1155842",
+        "127.1255842"
+      ]
+    },
+    {
+      "place_id": 222327801,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 12173491514,
+      "lat": "37.3946138",
+      "lon": "127.1217847",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 6.178454261077313e-05,
+      "addresstype": "highway",
+      "name": "성남역",
+      "display_name": "성남역, 이매로, 이매동, 판교, 분당구, 성남시, 경기도, 13564, 대한민국",
+      "boundingbox": [
+        "37.3945638",
+        "37.3946638",
+        "127.1217347",
+        "127.1218347"
+      ]
+    }
+  ],
+  "구성역": [
+    {
+      "place_id": 223196534,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 13424312023,
+      "lat": "37.2994354",
+      "lon": "127.1058484",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 6.0943770504265163e-05,
+      "addresstype": "highway",
+      "name": "구성역",
+      "display_name": "구성역, 용구대로2325번길, 마북동, 기흥구, 용인시, 경기도, 16921, 대한민국",
+      "boundingbox": [
+        "37.2993854",
+        "37.2994854",
+        "127.1057984",
+        "127.1058984"
+      ]
+    }
+  ],
+  "동탄역": [
+    {
+      "place_id": 222265419,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 5535381367,
+      "lat": "37.2003594",
+      "lon": "127.0955764",
+      "category": "railway",
+      "type": "station",
+      "place_rank": 30,
+      "importance": 0.3925477355191416,
+      "addresstype": "railway",
+      "name": "동탄",
+      "display_name": "동탄, 지하151, 동탄역로, 여울동, 동탄신도시, 화성시, 경기도, 18478, 대한민국",
+      "boundingbox": [
+        "37.1953594",
+        "37.2053594",
+        "127.0905764",
+        "127.1005764"
+      ]
+    },
+    {
+      "place_id": 222409217,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 6354256843,
+      "lat": "37.1996501",
+      "lon": "127.0960506",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 6.001449607075635e-05,
+      "addresstype": "highway",
+      "name": "동탄역(서측)",
+      "display_name": "동탄역(서측), 동탄역로, 동탄2신도시, 동탄신도시, 화성시, 경기도, 18478, 대한민국",
+      "boundingbox": [
+        "37.1996001",
+        "37.1997001",
+        "127.0960006",
+        "127.0961006"
+      ]
+    },
+    {
+      "place_id": 222288723,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 11548581508,
+      "lat": "37.1996510",
+      "lon": "127.0962463",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 6.001449607075635e-05,
+      "addresstype": "highway",
+      "name": "동탄역(동측)",
+      "display_name": "동탄역(동측), 동탄역로, 동탄2신도시, 동탄신도시, 화성시, 경기도, 18478, 대한민국",
+      "boundingbox": [
+        "37.1996010",
+        "37.1997010",
+        "127.0961963",
+        "127.0962963"
+      ]
+    }
+  ]
+}

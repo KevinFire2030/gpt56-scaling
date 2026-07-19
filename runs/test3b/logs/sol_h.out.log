@@ -1,0 +1,30 @@
+완료했습니다.
+
+산출물:
+- `E:\ax\PRJs\gpt56-scaling\runs\test3b\sol_h\index.html`
+- `E:\ax\PRJs\gpt56-scaling\runs\test3b\sol_h\SOURCES.md`
+- `E:\ax\PRJs\gpt56-scaling\runs\test3b\sol_h\VERIFICATION.md`
+
+주요 결과:
+- 1080×1920 세로형 고정 스테이지
+- 정확히 15.0초 rAF 타임라인 후 최종 화면 유지
+- 1974–2026 연도 진행
+- 1–9호선 및 주요 광역노선 총 19개
+- 역 마커 555개, 환승역 96개
+- 시작부터 전체 노선망 가이드 표시
+- 주요 역 라벨과 노선 개통 애니메이션 적용
+- Noto Sans KR 서브셋 폰트와 모든 데이터를 HTML 내부에 내장
+- 오디오·스크롤·외부 런타임 리소스 없음
+
+검증 결과:
+- 콘솔 오류: 0건
+- 페이지 오류: 0건
+- HTTP/HTTPS 런타임 요청: 0건
+- 최종 계측값: `{ t: 15, year: 2026, lines_shown: 19 }`
+- 15초 종료 후 0.6초 간격의 화면 SHA-256 동일
+- 최종 정지 화면 유지: PASS
+- 전체 달성 기준: 모두 PASS
+
+`index.html`을 브라우저에서 직접 열면 실행됩니다.
+  [tool] ಠ_ಠ musing...
+{"profile": "sol_h", "seconds": 1432.6, "html": true, "sources": true, "verification": true, "usage": true, "returncode": 0, "finished_at": "2026-07-19 18:53:29"}

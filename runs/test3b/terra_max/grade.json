@@ -1,0 +1,65 @@
+﻿{
+  "test": "test3b",
+  "run_dir": "runs\\test3b\\terra_max",
+  "gates": {
+    "G1_render": true,
+    "console_errors": [],
+    "runtime_ext_requests": [],
+    "G2_timeline": {
+      "t_complete": 15000,
+      "target": 15.0,
+      "ok": false,
+      "hold_since": 15000
+    },
+    "G3_year": {
+      "min": 1974,
+      "max": 2026,
+      "monotone": true,
+      "ok": true
+    },
+    "G4_growth": {
+      "coverage_series": [
+        0.03,
+        0.0336,
+        0.0335,
+        0.0349,
+        0.0395
+      ],
+      "final_hues": 24,
+      "monotone": true,
+      "color_div>=8": true,
+      "ok": true
+    },
+    "lines_shown_max": 21,
+    "sample_count": 85
+  },
+  "coverage": {
+    "2.0": {
+      "lit_ratio": 0.03,
+      "hues": 2
+    },
+    "5.0": {
+      "lit_ratio": 0.0336,
+      "hues": 2
+    },
+    "8.0": {
+      "lit_ratio": 0.0335,
+      "hues": 2
+    },
+    "11.0": {
+      "lit_ratio": 0.0349,
+      "hues": 6
+    },
+    "14.0": {
+      "lit_ratio": 0.0395,
+      "hues": 6
+    },
+    "final": {
+      "lit_ratio": 0.0907,
+      "hues": 24
+    }
+  },
+  "score_auto": 75,
+  "evaluator_pass": false,
+  "note": "데이터가 조합마다 다르므로 좌표·역명 정확도(노선 수·색상·개통연도)와 정성(다크모드 미감·연출)은 SOURCES.md·최종 프레임 수동 대조로 확정. window.__mg 미구현 시 계측 불가 → 수동 실행 필요."
+}

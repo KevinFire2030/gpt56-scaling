@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>DANTE LABS — Earth vs Moon Jump Lab</title>
+  <style>
+    :root{--ink:#f4f7ff;--muted:#9aa7bd;--line:rgba(255,255,255,.13);--glass:rgba(8,13,23,.72);--earth:#62b8ff;--moon:#e5e0d6;--lime:#c9ff57}
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#02050b;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    #app,#stage{position:fixed;inset:0}canvas{display:block;width:100%;height:100%}
+    #grain{position:fixed;inset:0;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}
+    header{position:fixed;z-index:4;top:0;left:0;right:0;height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(2,5,11,.9),rgba(2,5,11,.35));backdrop-filter:blur(10px)}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:13px;letter-spacing:.19em}.mark{width:25px;height:25px;border:1px solid rgba(255,255,255,.7);border-radius:50%;display:grid;place-items:center}.mark:after{content:"";width:7px;height:7px;background:var(--lime);border-radius:50%;box-shadow:0 0 17px var(--lime)}
+    .subtitle{font:500 10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+    .live{display:flex;gap:8px;align-items:center;font:600 10px ui-monospace,SFMono-Regular,Consolas,monospace;color:#b7c3d8}.live i{width:6px;height:6px;background:var(--lime);border-radius:50%;box-shadow:0 0 10px var(--lime);animation:pulse 1.7s infinite}@keyframes pulse{50%{opacity:.25}}
+    #split{position:fixed;z-index:2;top:74px;bottom:122px;left:50%;width:1px;background:linear-gradient(transparent,rgba(255,255,255,.28),transparent);pointer-events:none}
+    .world-label{position:fixed;z-index:3;top:98px;pointer-events:none}.world-label.left{left:26px}.world-label.right{left:calc(50% + 26px)}
+    .planet{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.18em}.planet i{display:block;width:7px;height:7px;border-radius:50%}.left .planet i{background:var(--earth);box-shadow:0 0 15px var(--earth)}.right .planet i{background:var(--moon);box-shadow:0 0 15px white}
+    .gravity{margin-top:8px;color:var(--muted);font:500 10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.08em}
+    .readout{position:fixed;z-index:3;top:162px;width:160px;padding:12px 13px;border:1px solid var(--line);background:rgba(5,9,16,.5);backdrop-filter:blur(8px);border-radius:8px;pointer-events:none}.readout.left{left:26px}.readout.right{left:calc(50% + 26px)}
+    .row{display:flex;justify-content:space-between;gap:10px;margin:5px 0;color:var(--muted);font:500 10px ui-monospace,SFMono-Regular,Consolas,monospace}.row b{color:var(--ink);font-weight:650}.status{color:var(--lime)!important;text-transform:uppercase}
+    #modelStatus{position:fixed;z-index:3;left:50%;top:94px;transform:translateX(-50%);font:500 9px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.08em;color:#9eabc0;pointer-events:none;background:rgba(2,5,11,.55);padding:5px 8px;border-radius:10px}
+    .toolbar{position:fixed;z-index:5;left:50%;bottom:29px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:14px;background:var(--glass);box-shadow:0 20px 60px rgba(0,0,0,.38);backdrop-filter:blur(18px)}
+    button{border:0;color:var(--ink);font:750 11px ui-sans-serif,system-ui;letter-spacing:.09em;cursor:pointer;border-radius:9px;height:42px;padding:0 17px;transition:.18s transform,.18s background}.primary{background:var(--lime);color:#121806;min-width:148px}.secondary{background:rgba(255,255,255,.08);border:1px solid var(--line)}button:hover{transform:translateY(-1px)}button:active{transform:translateY(1px)}button:focus-visible{outline:2px solid white;outline-offset:2px}button:disabled{opacity:.55;cursor:default;transform:none}
+    .hint{position:fixed;z-index:3;bottom:91px;left:50%;transform:translateX(-50%);font:500 9px ui-monospace,SFMono-Regular,Consolas,monospace;color:#8390a5;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
+    #fallback{display:none}
+    @media(max-width:700px){header{height:62px;padding:0 16px}.subtitle,.live span{display:none}#split{top:62px;bottom:112px}.world-label{top:78px}.world-label.left{left:14px}.world-label.right{left:calc(50% + 14px)}.readout{top:131px;width:calc(50% - 22px);padding:8px}.readout.left{left:8px}.readout.right{left:calc(50% + 8px)}.gravity{font-size:8px}.toolbar{bottom:19px}.hint{bottom:78px}.row{font-size:8px}.primary{min-width:130px}}
+  </style>
+</head>
+<body>
+<div id="app"><div id="stage" aria-label="지구와 달의 중력 점프를 비교하는 3D 시뮬레이션"></div></div>
+<div id="grain"></div><div id="split"></div>
+<header><div><div class="brand"><span class="mark"></span>DANTE LABS</div><div class="subtitle">Comparative Gravity Research Unit / Experiment 04</div></div><div class="live"><i></i><span>SIMULATION ONLINE</span></div></header>
+<section class="world-label left"><div class="planet"><i></i>EARTH</div><div class="gravity">g = 9.81 m/s² · 1.00 G</div></section>
+<section class="world-label right"><div class="planet"><i></i>MOON</div><div class="gravity">g = 1.62 m/s² · 0.165 G</div></section>
+<section class="readout left" aria-live="polite"><div class="row"><span>ALTITUDE</span><b id="earthAlt">0.00 m</b></div><div class="row"><span>VELOCITY</span><b id="earthVel">0.00 m/s</b></div><div class="row"><span>APEX</span><b id="earthApex">—</b></div><div class="row"><span>FALL TIME</span><b id="earthFall">—</b></div><div class="row"><span>STATE</span><b class="status" id="earthState">READY</b></div></section>
+<section class="readout right" aria-live="polite"><div class="row"><span>ALTITUDE</span><b id="moonAlt">0.00 m</b></div><div class="row"><span>VELOCITY</span><b id="moonVel">0.00 m/s</b></div><div class="row"><span>APEX</span><b id="moonApex">—</b></div><div class="row"><span>FALL TIME</span><b id="moonFall">—</b></div><div class="row"><span>STATE</span><b class="status" id="moonState">READY</b></div></section>
+<div id="modelStatus">LOADING ASTRONAUT…</div>
+<div class="hint">DRAG: ORBIT · WHEEL: ZOOM · SPACE: JUMP · R: RESET</div>
+<div class="toolbar"><button id="jump" class="primary">▶ RUN JUMP TEST</button><button id="pause" class="secondary">Ⅱ PAUSE</button><button id="reset" class="secondary">↺ RESET</button></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+(()=>{'use strict';
+const THREE_NS=window.THREE;
+if(!THREE_NS){document.getElementById('modelStatus').textContent='THREE.JS LOAD FAILED';return;}
+const ASSET_ROOT='https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/';
+const MODEL_URL='https://modelviewer.dev/shared-assets/models/Astronaut.glb';
+const GRAVITY={earth:9.81,moon:1.62}, JUMP_VELOCITY=3.2, FIXED_DT=1/120;
+const stage=document.getElementById('stage'), renderer=new THREE_NS.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setSize(innerWidth,innerHeight);renderer.outputEncoding=THREE_NS.sRGBEncoding;renderer.physicallyCorrectLights=true;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE_NS.PCFSoftShadowMap;renderer.autoClear=false;stage.appendChild(renderer.domElement);
+const worlds={};
+function makeWorld(kind){
+ const scene=new THREE_NS.Scene();scene.background=new THREE_NS.Color(kind==='earth'?0x020812:0x030407);scene.fog=new THREE_NS.FogExp2(kind==='earth'?0x071522:0x08090c,kind==='earth'?.025:.018);
+ const camera=new THREE_NS.PerspectiveCamera(42,1,.1,100);camera.position.set(7,3.9,10.8);camera.lookAt(0,1.8,0);
+ scene.add(new THREE_NS.HemisphereLight(kind==='earth'?0xaedaff:0xdce5ff,kind==='earth'?0x143424:0x171717,1.55));
+ const key=new THREE_NS.DirectionalLight(kind==='earth'?0xfff4db:0xdde7ff,3.1);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-7;key.shadow.camera.right=7;key.shadow.camera.top=8;key.shadow.camera.bottom=-4;scene.add(key);
+ const groundMat=new THREE_NS.MeshStandardMaterial({color:kind==='earth'?0x173423:0x77736c,roughness:.92,metalness:0});
+ const ground=new THREE_NS.Mesh(new THREE_NS.CircleGeometry(30,96),groundMat);ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
+ const rings=new THREE_NS.GridHelper(28,28,kind==='earth'?0x2a6b51:0x7a7770,kind==='earth'?0x163d32:0x353536);rings.material.transparent=true;rings.material.opacity=.22;scene.add(rings);
+ const astronautRoot=new THREE_NS.Group();scene.add(astronautRoot);
+ const shadow=new THREE_NS.Mesh(new THREE_NS.CircleGeometry(.58,40),new THREE_NS.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.33,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=.006;scene.add(shadow);
+ addStars(scene,kind);
+ if(kind==='moon') addCraters(scene); else addEarthHorizon(scene);
+ return {kind,scene,camera,groundMat,astronautRoot,shadow,body:null,sim:{y:0,v:0,apex:0,state:'READY',fallStart:0,fallTime:null,landedAt:null}};
+}
+function addStars(scene,kind){const n=kind==='moon'?650:260,pos=new Float32Array(n*3);for(let i=0;i<n;i++){const r=22+Math.random()*28,a=Math.random()*Math.PI*2,b=(Math.random()-.5)*Math.PI;pos[i*3]=Math.cos(a)*Math.cos(b)*r;pos[i*3+1]=Math.sin(b)*r+8;pos[i*3+2]=Math.sin(a)*Math.cos(b)*r;}const g=new THREE_NS.BufferGeometry();g.setAttribute('position',new THREE_NS.BufferAttribute(pos,3));scene.add(new THREE_NS.Points(g,new THREE_NS.PointsMaterial({color:kind==='moon'?0xdce6ff:0x8fb6d8,size:.045,transparent:true,opacity:.78})))}
+function addCraters(scene){for(let i=0;i<34;i++){const r=.08+Math.random()*.34,ring=new THREE_NS.Mesh(new THREE_NS.RingGeometry(r*.58,r,24),new THREE_NS.MeshBasicMaterial({color:0x3f3d3a,transparent:true,opacity:.23,side:THREE_NS.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.set((Math.random()-.5)*16,.012,(Math.random()-.5)*12);scene.add(ring)}}
+function addEarthHorizon(scene){const dome=new THREE_NS.Mesh(new THREE_NS.SphereGeometry(31,48,24,0,Math.PI*2,0,Math.PI/2),new THREE_NS.MeshBasicMaterial({color:0x0b2c3a,transparent:true,opacity:.14,side:THREE_NS.BackSide}));dome.position.y=-.2;scene.add(dome)}
+worlds.earth=makeWorld('earth');worlds.moon=makeWorld('moon');
+function fallbackAstronaut(){
+ const g=new THREE_NS.Group(),white=new THREE_NS.MeshStandardMaterial({color:0xe8edf2,roughness:.55}),dark=new THREE_NS.MeshStandardMaterial({color:0x101722,roughness:.3,metalness:.35}),gold=new THREE_NS.MeshStandardMaterial({color:0xc88724,roughness:.22,metalness:.7});
+ const part=(geo,mat,p,s)=>{const m=new THREE_NS.Mesh(geo,mat);m.position.set(...p);if(s)m.scale.set(...s);m.castShadow=true;m.receiveShadow=true;g.add(m);return m};
+ part(new THREE_NS.CapsuleGeometry(.38,.75,8,16),white,[0,1.05,0]);part(new THREE_NS.SphereGeometry(.4,24,16),white,[0,1.78,0]);part(new THREE_NS.SphereGeometry(.31,24,16),gold,[0,1.78,.22],[1,.72,.35]);part(new THREE_NS.BoxGeometry(.7,.78,.25),white,[0,1.08,-.32]);
+ [-1,1].forEach(s=>{const arm=part(new THREE_NS.CapsuleGeometry(.12,.68,6,12),white,[s*.53,1.16,0]);arm.rotation.z=s*.16;part(new THREE_NS.CapsuleGeometry(.15,.68,6,12),white,[s*.22,.38,0]);part(new THREE_NS.BoxGeometry(.34,.18,.53),dark,[s*.22,.08,.11])});part(new THREE_NS.BoxGeometry(.38,.25,.08),dark,[0,1.08,.4]);return g;
+}
+function mountAstronaut(template,isFallback){Object.values(worlds).forEach(w=>{const body=template.clone(true);const box=new THREE_NS.Box3().setFromObject(body),size=new THREE_NS.Vector3(),center=new THREE_NS.Vector3();box.getSize(size);box.getCenter(center);const scale=2.15/Math.max(size.y,.001);body.scale.setScalar(scale);body.position.set(-center.x*scale,-box.min.y*scale,-center.z*scale);body.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(o.material)o.material=o.material.clone()}});w.astronautRoot.add(body);w.body=body});document.getElementById('jump').disabled=false;document.getElementById('modelStatus').textContent=isFallback?'PROCEDURAL EVA SUIT · READY':'ASTRONAUT GLB · READY';setTimeout(()=>document.getElementById('modelStatus').style.opacity='0',1800)}
+document.getElementById('jump').disabled=true;
+try{new THREE_NS.GLTFLoader().load(MODEL_URL,g=>mountAstronaut(g.scene,false),undefined,()=>mountAstronaut(fallbackAstronaut(),true))}catch(_){mountAstronaut(fallbackAstronaut(),true)}
+// Optional supplied textures. Failures retain purpose-built material colors without interrupting the simulation.
+const tl=new THREE_NS.TextureLoader();tl.setCrossOrigin('anonymous');
+tl.load(ASSET_ROOT+'terrain/grasslight-big.jpg',t=>{t.wrapS=t.wrapT=THREE_NS.RepeatWrapping;t.repeat.set(10,10);t.encoding=THREE_NS.sRGBEncoding;worlds.earth.groundMat.map=t;worlds.earth.groundMat.needsUpdate=true},undefined,()=>{});
+tl.load(ASSET_ROOT+'planets/moon_1024.jpg',t=>{t.wrapS=t.wrapT=THREE_NS.RepeatWrapping;t.repeat.set(7,7);t.encoding=THREE_NS.sRGBEncoding;worlds.moon.groundMat.map=t;worlds.moon.groundMat.needsUpdate=true},undefined,()=>{});
+let running=false,paused=false,acc=0,last=performance.now(),elapsed=0;
+function reset(){running=false;paused=false;elapsed=0;acc=0;document.getElementById('pause').textContent='Ⅱ PAUSE';Object.values(worlds).forEach(w=>{Object.assign(w.sim,{y:0,v:0,apex:0,state:'READY',fallStart:0,fallTime:null,landedAt:null});w.astronautRoot.position.y=0;w.astronautRoot.rotation.set(0,0,0)});updateUI()}
+function jump(){reset();running=true;Object.values(worlds).forEach(w=>{w.sim.v=JUMP_VELOCITY;w.sim.state='ASCENDING'});updateUI()}
+function step(dt){if(!running||paused)return;const stepStart=elapsed;elapsed+=dt;let done=true;Object.values(worlds).forEach(w=>{const s=w.sim;if(s.state==='LANDED')return;done=false;const g=GRAVITY[w.kind],oldY=s.y,oldV=s.v;s.y=oldY+oldV*dt-.5*g*dt*dt;s.v=oldV-g*dt;if(oldV>0&&s.v<=0){const toApex=oldV/g;s.state='DESCENDING';s.apex=oldY+oldV*toApex-.5*g*toApex*toApex;s.fallStart=stepStart+toApex}else{s.apex=Math.max(s.apex,s.y)}if(s.y<=0&&s.v<0){const toGround=(oldV+Math.sqrt(oldV*oldV+2*g*Math.max(0,oldY)))/g;s.y=0;s.v=0;s.state='LANDED';s.landedAt=stepStart+toGround;s.fallTime=s.landedAt-s.fallStart}});if(done)running=false}
+function updateUI(){Object.values(worlds).forEach(w=>{const p=w.kind,s=w.sim;document.getElementById(p+'Alt').textContent=s.y.toFixed(2)+' m';document.getElementById(p+'Vel').textContent=s.v.toFixed(2)+' m/s';document.getElementById(p+'Apex').textContent=s.apex?s.apex.toFixed(2)+' m':'—';document.getElementById(p+'Fall').textContent=s.fallTime===null?'—':s.fallTime.toFixed(2)+' s';document.getElementById(p+'State').textContent=s.state})}
+function animateVisuals(t){Object.values(worlds).forEach(w=>{const s=w.sim;w.astronautRoot.position.y=s.y;const airborne=s.y>0;w.astronautRoot.rotation.z=airborne?Math.sin(t*.0023)*.055:0;w.astronautRoot.rotation.x=airborne?-.04:0;w.shadow.scale.setScalar(Math.max(.32,1-s.y*.12));w.shadow.material.opacity=Math.max(.07,.33-s.y*.055)})}
+let orbit={yaw:.55,pitch:.16,dist:12.8},drag=null;
+function applyCamera(w){const targetY=1.65,cp=Math.cos(orbit.pitch);w.camera.position.set(Math.sin(orbit.yaw)*cp*orbit.dist,targetY+Math.sin(orbit.pitch)*orbit.dist,Math.cos(orbit.yaw)*cp*orbit.dist);w.camera.lookAt(0,targetY,0)}
+renderer.domElement.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};renderer.domElement.setPointerCapture(e.pointerId)});renderer.domElement.addEventListener('pointermove',e=>{if(!drag)return;orbit.yaw-=(e.clientX-drag.x)*.006;orbit.pitch=Math.max(-.04,Math.min(.55,orbit.pitch+(e.clientY-drag.y)*.004));drag={x:e.clientX,y:e.clientY}});renderer.domElement.addEventListener('pointerup',()=>drag=null);renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();orbit.dist=Math.max(8,Math.min(18,orbit.dist+e.deltaY*.009))},{passive:false});
+function render(now){requestAnimationFrame(render);const frame=Math.min((now-last)/1000,.05);last=now;acc+=frame;while(acc>=FIXED_DT){step(FIXED_DT);acc-=FIXED_DT}animateVisuals(now);updateUI();renderer.setScissorTest(true);renderer.clear();const top=innerWidth<=700?62:74,bottom=innerWidth<=700?112:122,h=Math.max(1,innerHeight-top-bottom),half=Math.floor(innerWidth/2);[['earth',0,half],['moon',half,innerWidth-half]].forEach(([k,x,w])=>{const world=worlds[k];applyCamera(world);world.camera.aspect=w/h;world.camera.updateProjectionMatrix();renderer.setViewport(x,bottom,w,h);renderer.setScissor(x,bottom,w,h);renderer.render(world.scene,world.camera)});renderer.setScissorTest(false)}
+addEventListener('resize',()=>{renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setSize(innerWidth,innerHeight)});
+document.getElementById('jump').addEventListener('click',jump);document.getElementById('reset').addEventListener('click',reset);document.getElementById('pause').addEventListener('click',()=>{paused=!paused;document.getElementById('pause').textContent=paused?'▶ RESUME':'Ⅱ PAUSE'});addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();jump()}if(e.key.toLowerCase()==='r')reset()});
+window.__jumpLab={GRAVITY,JUMP_VELOCITY,FIXED_DT,worlds,jump,reset,getMetrics:()=>Object.fromEntries(Object.entries(worlds).map(([k,w])=>[k,{...w.sim}]))};
+reset();requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>
